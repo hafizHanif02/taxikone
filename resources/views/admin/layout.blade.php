@@ -9,6 +9,19 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
+            <!-- Datatables css -->
+    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
+        
         <!-- Daterangepicker css -->
         <link rel="stylesheet" href="assets/vendor/daterangepicker/daterangepicker.css">
 
@@ -67,15 +80,8 @@
                             </div>
                         </button>
 
-                        <!-- Topbar Search Form -->
-                        <div class="app-search d-none d-lg-block">
-                            <form>
-                                <div class="input-group">
-                                    <input type="search" class="form-control" placeholder="Search...">
-                                    <span class="ri-search-line search-icon text-muted"></span>
-                                </div>
-                            </form>
-                        </div>
+
+
                     </div>
 
                     <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -282,12 +288,63 @@
 
                         <li class="side-nav-item">
                             <a href="/rides" class="side-nav-link">
-                                <i class="ri-texi-line"></i>
+                                <i class="ri-taxi-line"></i>
                                 <span class="badge bg-success float-end"></span>
                                 <span>Rides</span>
                             </a>
                         </li>
+                        <li class="side-nav-item">
+                            <a href="/hotels" class="side-nav-link">
+                                <i class="ri-hotel-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Hotel</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="/destination" class="side-nav-link">
+                                <i class="ri-road-map-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Destinations</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="/destination" class="side-nav-link">
+                                <i class="ri-taxi-wifi-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Drivers</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-title">Finance</li>
+                        <li class="side-nav-item">
+                            <a href="/payments" class="side-nav-link">
+                                <i class="ri-money-euro-box-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Payments</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="/commission" class="side-nav-link">
+                                <i class="ri-hand-coin-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Commissions</span>
+                            </a>
+                        </li>
 
+                        <li class="side-nav-title">Settings</li>
+                        <li class="side-nav-item">
+                            <a href="/users" class="side-nav-link">
+                                <i class="ri-group-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="/permision" class="side-nav-link">
+                                <i class="ri-lock-2-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Permision</span>
+                            </a>
+                        </li>
 
                     </ul>
                     <!--- End Sidemenu -->
@@ -501,12 +558,28 @@
         <script src="assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
         <script src="assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
 
-        <!-- Dashboard App js -->
-        <script src="assets/js/pages/dashboard.js"></script>
 
 
-        <!-- App js -->
-        <script src="assets/js/app.min.js"></script>
+        <!-- Datatables js -->
+    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
 
+     <!-- Dashboard App js -->
+     <script src="assets/js/pages/dashboard.js"></script>
+
+
+     <!-- App js -->
+     <script src="assets/js/app.min.js"></script>
     </body>
 </html>

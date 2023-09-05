@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RideController;
 
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard']);
+    Route::get('/rides', [RideController::class, 'showRides']);
 });
 
 Route::get('/login', [UserController::class, 'login']);
