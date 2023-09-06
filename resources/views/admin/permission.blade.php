@@ -31,7 +31,7 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between" >
                                     <h4 class="header-title">Roles List</h4>
-                                    <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ri-add-line"></i> New</button>
+                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
                                 <div class="card-body">
                                     <table id="datatable-buttons"
@@ -48,25 +48,21 @@
 
 
                                         <tbody>
+
+
+                                            @foreach ($roles as $role)
                                             <tr>
-                                                <td>1</td>
-                                                <td>System Architect</td>
+                                                <td>{{$role->id}}</td>
+                                                <td id="name{{$role->id}}">{{$role->name}}</td>
                                                 <td>24</td>
                                                 <td>
-                                                    <button class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ri-edit-2-line"></i></button>
+                                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$role->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View"><i class="ri-eye-line"></i></button>
                                                     <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ri-delete-bin-line"></i></button>
                                                 </td>
 
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Accountant</td>
-                                                <td>55</td>
-                                                <td>63</td>
-
-                                            </tr>
-
+                                            @endforeach
 
                                         </tbody>
                                     </table>
@@ -81,6 +77,67 @@
 
             </div> <!-- content -->
 
+
+            {{-- Models start here --}}
+            <!-- Standard modal content -->
+            <div id="add-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="add-modalLabel">Adding New Role</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="ps-3 pe-3" action="" method="POST">
+                        <div class="modal-body">
+
+
+                                <div class="mb-3">
+                                    @csrf
+                                    <label for="username" class="form-label">Role Name</label>
+                                    <input type="hidden" name="type" value="new">
+                                    <input type="hidden" name="roleID" value="0">
+                                    <input class="form-control" type="text" name="roleName" required="" placeholder="Role Name here">
+                                </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="add-modalLabel">Update Role</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="ps-3 pe-3" action="/permision/edit" method="POST">
+                        <div class="modal-body">
+
+
+                                <div class="mb-3">
+                                    @csrf
+                                    <label for="username" class="form-label">Role Name</label>
+                                    <input type="hidden" name="type" value="update">
+                                    <input type="hidden" id="roleID" name="roleID" value="0">
+                                    <input class="form-control" type="text" name="roleName" id="roleName" required="" placeholder="Role Name here">
+                                </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            {{-- Models end here --}}
             <!-- Footer Start -->
             <footer class="footer">
                 <div class="container-fluid">
@@ -101,3 +158,15 @@
 
         </div>
 @endsection
+
+
+<script>
+
+function setDataToModel(id){
+    console.log(id);
+    let roleName = document.getElementById('name'+id).innerHTML;
+    console.log(roleName);
+    document.getElementById('roleName').value = roleName;
+    document.getElementById('roleID').value = id;
+}
+</script>
