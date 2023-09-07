@@ -7,38 +7,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
             <!-- Datatables css -->
-    <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+    <link href="/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
         type="text/css" />
-    <link href="assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
+    <link href="/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet"
         type="text/css" />
-    <link href="assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
+    <link href="/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet"
         type="text/css" />
-    <link href="assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
+    <link href="/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet"
         type="text/css" />
-    <link href="assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+    <link href="/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
         type="text/css" />
 
         <!-- Daterangepicker css -->
-        <link rel="stylesheet" href="assets/vendor/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" href="/assets/vendor/daterangepicker/daterangepicker.css">
 
         <!-- Vector Map css -->
-        <link rel="stylesheet" href="assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+        <link rel="stylesheet" href="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
 
         <!-- Theme Config Js -->
-        <script src="assets/js/config.js"></script>
+        <script src="/assets/js/config.js"></script>
 
         <!-- App css -->
-        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+        <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
         <!-- Icons css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <style>
+            .txt-center {
+                text-align: center;
+            }
+        </style>
     </head>
 
     <body>
+        @include('admin.toast')
         <!-- Begin page -->
         <div class="wrapper">
 
@@ -53,7 +59,7 @@
                             <!-- Logo light -->
                             <a href="index.html" >
                                 <span >
-                                    <img src="assets/images/logo.png" alt="logo"><span style="
+                                    <img src="/assets/images/logo.png" alt="logo"><span style="
                                     font-size: 20px;
                                     font-weight: bold;
                                     font-family: cursive;
@@ -204,7 +210,7 @@
                             <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                                    <img src="/assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
                                 </span>
                                 <span class="d-lg-block d-none">
                                     <h5 class="my-0 fw-normal">{{$userData->name}} <i
@@ -248,7 +254,7 @@
                 <!-- Brand Logo Light -->
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="assets/images/logo.png" alt="logo">
+                        <img src="/assets/images/logo.png" alt="logo">
                         <span style="
                                     font-size: 20px;
                                     font-weight: bold;
@@ -257,17 +263,17 @@
                                 </span>
                     </span>
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="small logo">
+                        <img src="/assets/images/logo-sm.png" alt="small logo">
                     </span>
                 </a>
 
                 <!-- Brand Logo Dark -->
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-lg">
-                        <img src="assets/images/logo-dark.png" alt="dark logo">
+                        <img src="/assets/images/logo-dark.png" alt="dark logo">
                     </span>
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="small logo">
+                        <img src="/assets/images/logo-sm.png" alt="small logo">
                     </span>
                 </a>
 
@@ -376,7 +382,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-light" value="light">
                                     <label class="form-check-label" for="layout-color-light">
-                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                        <img src="/assets/images/layouts/light.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -386,7 +392,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-dark" value="dark">
                                     <label class="form-check-label" for="layout-color-dark">
-                                        <img src="assets/images/layouts/dark.png" alt="" class="img-fluid">
+                                        <img src="/assets/images/layouts/dark.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -401,7 +407,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-fluid" value="fluid">
                                         <label class="form-check-label" for="layout-mode-fluid">
-                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Fluid</h5>
@@ -412,7 +418,7 @@
                                         <div class="form-check form-switch card-switch mb-1">
                                             <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-boxed" value="boxed">
                                             <label class="form-check-label" for="layout-mode-boxed">
-                                                <img src="assets/images/layouts/boxed.png" alt="" class="img-fluid">
+                                                <img src="/assets/images/layouts/boxed.png" alt="" class="img-fluid">
                                             </label>
                                         </div>
                                         <h5 class="font-14 text-center text-muted mt-2">Boxed</h5>
@@ -428,7 +434,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-light" value="light">
                                     <label class="form-check-label" for="topbar-color-light">
-                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                        <img src="/assets/images/layouts/light.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -438,7 +444,7 @@
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-dark" value="dark">
                                     <label class="form-check-label" for="topbar-color-dark">
-                                        <img src="assets/images/layouts/topbar-dark.png" alt="" class="img-fluid">
+                                        <img src="/assets/images/layouts/topbar-dark.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -453,7 +459,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-light" value="light">
                                         <label class="form-check-label" for="leftbar-color-light">
-                                            <img src="assets/images/layouts/sidebar-light.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/layouts/sidebar-light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -463,7 +469,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-dark" value="dark">
                                         <label class="form-check-label" for="leftbar-color-dark">
-                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -479,7 +485,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-default" value="default">
                                         <label class="form-check-label" for="leftbar-size-default">
-                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Default</h5>
@@ -489,7 +495,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-compact" value="compact">
                                         <label class="form-check-label" for="leftbar-size-compact">
-                                            <img src="assets/images/layouts/compact.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/layouts/compact.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Compact</h5>
@@ -499,7 +505,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-small" value="condensed">
                                         <label class="form-check-label" for="leftbar-size-small">
-                                            <img src="assets/images/layouts/sm.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/layouts/sm.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Condensed</h5>
@@ -510,7 +516,7 @@
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-full" value="full">
                                         <label class="form-check-label" for="leftbar-size-full">
-                                            <img src="assets/images/layouts/full.png" alt="" class="img-fluid">
+                                            <img src="/assets/images/layouts/full.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Full Layout</h5>
@@ -545,39 +551,64 @@
         </div>
 
         <!-- Vendor js -->
-        <script src="assets/js/vendor.min.js"></script>
+        <script src="/assets/js/vendor.min.js"></script>
 
         <!-- Daterangepicker js -->
-        <script src="assets/vendor/daterangepicker/moment.min.js"></script>
-        <script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+        <script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+        <script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
 
         <!-- Apex Charts js -->
-        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
 
         <!-- Vector Map js -->
-        <script src="assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="/assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
 
 
 <!-- Vendor js -->
-<script src="assets/js/vendor.min.js"></script>
+<script src="/assets/js/vendor.min.js"></script>
         <!-- Datatables js -->
-    <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script> -->
-    <script src="assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script> -->
+    <script src="/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
 
     <!-- Datatable Demo Aapp js -->
-    <script src="assets/js/pages/datatable.init.js"></script>
+    <script src="/assets/js/pages/datatable.init.js"></script>
 
      <!-- Dashboard App js -->
-     <script src="assets/js/pages/dashboard.js"></script>
+     <script src="/assets/js/pages/dashboard.js"></script>
 
 
      <!-- App js -->
-     <script src="assets/js/app.min.js"></>
+     <script src="/assets/js/app.min.js"></>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+        <script>
+            function showToast(type, message) {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 3000
+                };
+
+                if (type === 'success') {
+                    toastr.success(message);
+                } else if (type === 'error') {
+                    toastr.error(message);
+                } else if (type === 'warning') {
+                    toastr.warning(message);
+                } else if (type === 'info') {
+                    toastr.info(message);
+                }
+            }
+        </script>
+
     </body>
 </html>

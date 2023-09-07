@@ -30,7 +30,10 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between" >
-                                    <h4 class="header-title">Roles List</h4>
+                                    <div>
+                                    <h4 class="header-title">{{$roleName->name}} Permission List</h4>
+                                    <p>Please add only, which module you want to give permission to access</p>
+                                    </div>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
                                 <div class="card-body">
@@ -39,9 +42,8 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Role</th>
-                                                <th>Modules</th>
-                                                <th>Action</th>
+                                                <th>Module Name</th>
+                                                <th></th>
 
                                             </tr>
                                         </thead>
@@ -50,14 +52,11 @@
                                         <tbody>
 
 
-                                            @foreach ($roles as $role)
+                                            @foreach ($permission as $role)
                                             <tr>
                                                 <td>{{$role->id}}</td>
                                                 <td id="name{{$role->id}}">{{$role->name}}</td>
-                                                <td>24</td>
                                                 <td class="txt-center">
-                                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$role->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
-                                                    <a href="/permision/{{$role->id}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View"><i class="ri-eye-line"></i></a>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$role->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
                                                 </td>
 
@@ -95,37 +94,9 @@
                                     @csrf
                                     <label for="username" class="form-label">Role Name</label>
                                     <input type="hidden" name="type" value="new">
-                                    <input type="hidden" name="roleID" value="0">
+                                    <input type="hidden" name="permissionID" value="0">
                                     <input class="form-control" type="text" name="roleName" required="" placeholder="Role Name here">
-                                </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-
-            <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="add-modalLabel">Update Role</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form class="ps-3 pe-3" action="/permision" method="POST">
-                        <div class="modal-body">
-
-
-                                <div class="mb-3">
-                                    @csrf
-                                    <label for="username" class="form-label">Role Name</label>
-                                    <input type="hidden" name="type" value="update">
-                                    <input type="hidden" id="roleID" name="roleID" value="0">
-                                    <input class="form-control" type="text" name="roleName" id="roleName" required="" placeholder="Role Name here">
+                                    
                                 </div>
 
                         </div>
@@ -151,9 +122,9 @@
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">Are you sure, you want to delete this role ?</label>
+                                    <label for="username" class="form-label">Are you sure, you want to decline this permission ?</label>
                                     <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" id="roleIDDelete" name="roleID" value="0">
+                                    <input type="hidden" id="roleIDDelete" name="permissionID" value="0">
 
 
                                 </div>

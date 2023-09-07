@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth.custom'], function () {
 
     Route::get('/permision', [PermissionController::class, 'showPermission']);
     Route::post('/permision', [PermissionController::class, 'addPermission']);
+
+    Route::get('/permision/{roleID}', [PermissionController::class, 'showPermissionList']);
 });
 
 Route::get('/login', [UserController::class, 'login']);

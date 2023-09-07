@@ -22,7 +22,21 @@ class PermissionController extends Controller
         }
     }
 
+    public function showPermissionList(Request $request){
+
+        if(Auth::check()){
+            $userData = Auth::user();
+            if($userData->is_admin){
+                $permission = permission::where('role_id', $request->roleID)->get();
+                $roleName = role_permission::where('id', $request->roleID)->first();
+                return view('admin.permissionList', ['userData'=>$userData, 'permission'=> $permission, 'roleName'=>$roleName]);
+            }
+            return "asdfdsf";
+        }
+    }
+
     public function addPermission(Request $request){
+
         if(Auth::check()){
             $userData = Auth::user();
             if($userData->is_admin){
@@ -32,12 +46,16 @@ class PermissionController extends Controller
                     $newRole->description = $request->roleName;
                     $newRole->save();
                 }else if($request->type == 'update'){
-                    $role = role_permission::find($request->roleId);
+                    $role = role_permission::where('id',$request->roleID)->first();
+
                     if($role){
-                        $role->name = $request->name;
+                        $role->name = $request->roleName;
                         $role->save();
+                        echo '<script>showToast("success", "Operation successful.");</script>';
                     }
 
+                }else if($request->type == 'delete'){
+                    $role = role_permission::where('id',$request->roleID)->delete();
                 }
 
                 return redirect()->back();
