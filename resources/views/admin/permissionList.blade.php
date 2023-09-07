@@ -34,7 +34,7 @@
                                     <h4 class="header-title">{{$roleName->name}} Permission List</h4>
                                     <p>Please add only, which module you want to give permission to access</p>
                                     </div>
-                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
+                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> Add</button>
                                 </div>
                                 <div class="card-body">
                                     <table id="datatable-buttons"
@@ -92,11 +92,16 @@
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">Role Name</label>
+                                    <label for="username" class="form-label">Module</label>
                                     <input type="hidden" name="type" value="new">
-                                    <input type="hidden" name="permissionID" value="0">
                                     <input class="form-control" type="text" name="roleName" required="" placeholder="Role Name here">
-                                    
+                                    <select name="module">
+                                        <option>a</option>
+                                        <option>a</option>
+                                        <option>a</option>
+                                        <option>a</option>
+                                    </select>
+
                                 </div>
 
                         </div>
