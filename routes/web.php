@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RideController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\HotelController;
 
 
 /*
@@ -24,6 +25,8 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard']);
     Route::get('/rides', [RideController::class, 'showRides']);
+
+    Route::get('/hotels',[HotelController::class, 'show']);
 
     Route::get('/permision', [PermissionController::class, 'showPermission']);
     Route::post('/permision', [PermissionController::class, 'addPermission']);

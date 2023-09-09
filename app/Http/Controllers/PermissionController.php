@@ -22,6 +22,11 @@ class PermissionController extends Controller
         }
     }
 
+ 
+           
+        
+    
+
     public function showPermissionList(Request $request){
 
         if(Auth::check()){
