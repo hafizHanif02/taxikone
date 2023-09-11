@@ -1,10 +1,10 @@
 @extends('admin.layout') <!-- Extend the layout file -->
 
-@section('title', 'Admin Dashboard') <!-- Define the title -->
+@section('title', 'Destination') <!-- Define the title -->
 
 @section('content') <!-- Fill in the content section -->
 
-   <!-- ============================================================== -->
+            <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
             <div class="content-page">
@@ -18,7 +18,7 @@
                         <div class="col-12">
                             <div class="page-title-box">
 
-                                <h4 class="page-title">Hotels</h4>
+                                <h4 class="page-title">Destination</h4>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between" >
-                                    <h4 class="header-title">Hotel List</h4>
+                                    <h4 class="header-title">Destination List</h4>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
                                 <div class="card-body">
@@ -39,21 +39,22 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Hote Name</th>
-                                                <th>Controller Username</th>
+                                                <th>Destination</th>
                                                 <th>Address</th>
                                                 <th>Action</th>
+
                                             </tr>
                                         </thead>
 
 
                                         <tbody>
-                                            @foreach ($hotels as $htl)
+
+
+                                            @foreach ($dest as $dst)
                                             <tr>
-                                                <td>{{$htl->id}}</td>
-                                                <td id="name{{$htl->id}}">{{$htl->name}}</td>
-                                                <td id="userID{{$htl->id}}">{{$htl->user_id}}</td>
-                                                <td id="address{{$htl->id}}">{{$htl->address}}</td>
+                                                <td>{{$dst->id}}</td>
+                                                <td id="name{{$dst->id}}">{{$dst->name}}</td>
+                                                <td id="address{{$dst->id}}">{{$dst->address}}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$dst->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$dst->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
@@ -82,7 +83,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-modalLabel">Adding New Hotel</h4>
+                            <h4 class="modal-title" id="add-modalLabel">Adding New Role</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form class="ps-3 pe-3" action="" method="POST">
@@ -91,10 +92,14 @@
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">Hotel Name</label>
+
                                     <input type="hidden" name="type" value="new">
-                                    <input type="hidden" name="hotelID" value="0">
-                                    <input class="form-control" type="text" name="hotelName" required="" placeholder="hotel Name here">
+                                    <input type="hidden" name="destID" value="0">
+                                    <label for="username" class="form-label">Destination Name</label>
+                                    <input class="form-control" type="text" name="destinationName" required="" placeholder="Name here">
+                                    <br>
+                                    <label for="username" class="form-label">Destination Address</label>
+                                    <input class="form-control" type="text" name="destinationAddress" required="" placeholder="Address here">
                                 </div>
 
                         </div>
@@ -111,19 +116,23 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-modalLabel">Update hotel</h4>
+                            <h4 class="modal-title" id="add-modalLabel">Update Destination</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="/permision" method="POST">
+                        <form class="ps-3 pe-3" action="" method="POST">
                         <div class="modal-body">
 
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">hotel Name</label>
+
                                     <input type="hidden" name="type" value="update">
-                                    <input type="hidden" id="hotelID" name="hotelID" value="0">
-                                    <input class="form-control" type="text" name="hotelName" id="hotelName" required="" placeholder="hotel Name here">
+                                    <input type="hidden" name="destID" value="0" id="destID">
+                                    <label for="username" class="form-label">Destination Name</label>
+                                    <input class="form-control" type="text" id="destinationName" name="destinationName" required="" placeholder="Name here">
+                                    <br>
+                                    <label for="username" class="form-label">Destination Address</label>
+                                    <input class="form-control" type="text" id="destinationAddress" name="destinationAddress" required="" placeholder="Address here">
                                 </div>
 
                         </div>
@@ -140,18 +149,18 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="delete-modalLabel">Delete hotel</h4>
+                            <h4 class="modal-title" id="delete-modalLabel">Delete</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="/permision" method="POST">
+                        <form class="ps-3 pe-3" action="" method="POST">
                         <div class="modal-body">
 
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">Are you sure, you want to delete this hotel ?</label>
+                                    <label for="username" class="form-label">Are you sure, you want to delete this Destination ?</label>
                                     <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" id="hotelIDDelete" name="hotelID" value="0">
+                                    <input type="hidden" name="destID" value="0" id="DeldestID">
 
 
                                 </div>
@@ -171,7 +180,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Techzaa</b>
+                            {{-- <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Techzaa</b> --}}
                         </div>
                     </div>
                 </div>
@@ -192,13 +201,15 @@
 
 function setDataToModel(id){
     console.log(id);
-    let hotelName = document.getElementById('name'+id).innerHTML;
-    console.log(hotelName);
-    document.getElementById('hotelName').value = hotelName;
-    document.getElementById('hotelID').value = id;
+    let destName = document.getElementById('name'+id).innerHTML;
+    let destAddress = document.getElementById('address'+id).innerHTML;
+
+    document.getElementById('destinationName').value = destName;
+    document.getElementById('destinationAddress').value = destAddress;
+    document.getElementById('destID').value = id;
 }
 
 function setDataToModelDelete(id){
-    document.getElementById('hotelIDDelete').value = id;
+    document.getElementById('DeldestID').value = id;
 }
 </script>

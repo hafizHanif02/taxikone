@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RideController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\DistinationController;
 
 
 /*
@@ -27,6 +28,9 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/rides', [RideController::class, 'showRides']);
 
     Route::get('/hotels',[HotelController::class, 'show']);
+
+    Route::get('/destination',[DistinationController::class, 'showDestination']);
+    Route::post('/destination',[DistinationController::class, 'addEditDeleteDestination']);
 
     Route::get('/permision', [PermissionController::class, 'showPermission']);
     Route::post('/permision', [PermissionController::class, 'addPermission']);

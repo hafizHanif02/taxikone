@@ -4,82 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\distination;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class DistinationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function showDestination(){
+        if(Auth::check()){
+            $userData = Auth::user();
+            if($userData->is_admin){
+                $dest = distination::get();
+                return view('admin.destination', ['userData'=>$userData, 'dest'=> $dest]);
+            }
+            return "asdfdsf";
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function addEditDeleteDestination(Request $request){
+        
+        if(Auth::check()){
+            $userData = Auth::user();
+            if($userData->is_admin){
+                if($request->type == 'new'){
+                    $newDest = new distination();
+                    $newDest->name = $request->destinationName;
+                    $newDest->address = $request->destinationAddress;
+                    $newDest->save();
+                }else if($request->type == 'update'){
+                    $Dest = distination::where('id',$request->destID)->first();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+                    if($Dest){
+                        $Dest->name = $request->destinationName;
+                        $Dest->address = $request->destinationAddress;
+                        $Dest->save();
+                        echo '<script>showToast("success", "Operation successful.");</script>';
+                    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\distination  $distination
-     * @return \Illuminate\Http\Response
-     */
-    public function show(distination $distination)
-    {
-        //
-    }
+                }else if($request->type == 'delete'){
+                    $Dest = distination::where('id',$request->destID)->delete();
+                }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\distination  $distination
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(distination $distination)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\distination  $distination
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, distination $distination)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\distination  $distination
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(distination $distination)
-    {
-        //
+                return redirect()->back();
+            }
+            return redirect('/dashboard');
+        }
+        return redirect('/login');
     }
 }
