@@ -16,11 +16,12 @@ class CreateRidesTable extends Migration
         Schema::create('rides', function (Blueprint $table) {
             $table->id();
             $table->integer('hotel_id')->unsigned()->nullable()->default(0);
-            $table->double('distination_id', 15, 8)->nullable()->default(0.00);
-            $table->double('comission_rate', 15, 8)->nullable()->default(0.00);
+            $table->int('distination_id', 15, 8)->nullable()->default(0);
+            $table->double('comission_rate', 15, 8)->nullable()->default(0);
+            $table->int('driver_id', 15, 8)->nullable()->default(0);
             $table->integer('driver_paid')->unsigned()->nullable()->default(0);
             $table->integer('hotel_paid')->unsigned()->nullable()->default(0);
-            $table->double('cost', 15, 8)->nullable()->default(0.00);
+            $table->double('cost', 15, 8)->nullable()->default(0);
             $table->dateTime('ride_datetime')->nullable()->default(DB::raw('CURRENT_DATE'));
             $table->timestamps();
         });

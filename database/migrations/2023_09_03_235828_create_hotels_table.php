@@ -17,7 +17,7 @@ class CreateHotelsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('user_id')->unsigned()->nullable()->default(0);
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
