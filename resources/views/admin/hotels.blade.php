@@ -85,17 +85,35 @@
                             <h4 class="modal-title" id="add-modalLabel">Adding New Hotel</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="" method="POST">
+                        <form class="ps-3 pe-3" action="{{route('hotel.store')}}" method="POST">
+                            @csrf
                         <div class="modal-body">
 
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">Hotel Name</label>
-                                    <input type="hidden" name="type" value="new">
-                                    <input type="hidden" name="hotelID" value="0">
-                                    <input class="form-control" type="text" name="hotelName" required="" placeholder="hotel Name here">
+                                    <div class="row">
+                                        <label for="username" class="form-label">Hotel Name</label>
+                                        <input type="hidden" name="type" value="new">
+                                        
+                                        
+                                        <input type="hidden" name="hotelID" value="0">
+                                        <input class="form-control" type="text" name="hotelName" required="" placeholder="hotel Name here">
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <label for="username" class="form-label">Hotel Address</label>
+                                    <input type="text" placeholder="hotel address here" class="form-control" name="adress">
+                                </div>
+
+                                {{-- <div class="row">
+                                    <label for="username" class="form-label">Manager</label>
+                                    <select name="manager_id" id="manager_id">
+                                        <option value="" disabled selected>Select Manager</option>
+                                        @foreach($managers  as $manager)
+                                        <option value="{{$manager->id}}">{{$manager->name}}</option>
+                                    </select>
+                                </div> --}}
 
                         </div>
                         <div class="modal-footer">

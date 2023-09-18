@@ -25,11 +25,13 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        // $user = new User();
-        // $user->name = 'Admin';
-        // $user->username = $request->input('userName');
-        // $user->password = Hash::make($request->input('password')); // Hash the password
-        // $user->save();
+        $user = new User();
+        $user->name = 'Admin';
+        $user->username = $request->input('userName');
+        $user->email = '';
+        $user->email_verified_at = now();
+        $user->password = Hash::make($request->input('password')); // Hash the password
+        $user->save();
 
         // Attempt to log the user in
         if (Auth::attempt(['username' => $request->userName, 'password' => $request->password])) {
@@ -47,7 +49,7 @@ class UserController extends Controller
             if($userData->is_admin){
                 return view('admin.dashboard', ['userData'=>$userData]);
             }
-            return "asdfdsf";
         }
+        return "asdfdsf";
     }
 }

@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('email');
+            $table->string('email_verified_at');
             $table->string('password');
             $table->integer('is_driver')->unsigned()->nullable()->default(0);
             $table->integer('is_hotel')->unsigned()->nullable()->default(0);

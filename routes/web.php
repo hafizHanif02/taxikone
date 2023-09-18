@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/rides', [RideController::class, 'showRides']);
 
     Route::get('/hotels',[HotelController::class, 'show']);
+    Route::post('/hotels/store',[HotelController::class, 'store'])->name('hotel.store');
 
     Route::get('/destination',[DistinationController::class, 'showDestination']);
     Route::post('/destination',[DistinationController::class, 'addEditDeleteDestination']);
