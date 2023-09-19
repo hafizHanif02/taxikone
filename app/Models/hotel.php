@@ -11,19 +11,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class hotel extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'user_id',
+        'manager_id',
+        'address',
+    ];
    
     
 }
 
 
-// function manager(): BelongsTo
-// {
-//     return $this->belongsTo(Manager::class, 'coach_id');
-// };
+function manager(): BelongsTo
+{
+    return $this->belongsTo(Manager::class, 'coach_id');
+};
 
-// function drivers(): HasMany
-// {
-//     return $this->belongsTo(Drivers::class, 'coach_id');
-// };
+function drivers(): HasMany
+{
+    return $this->belongsTo(Drivers::class, 'coach_id');
+};
 
 

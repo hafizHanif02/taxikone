@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\RideController;
-use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\DistinationController;
 
 
@@ -27,11 +28,14 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard']);
     Route::get('/rides', [RideController::class, 'showRides']);
 
-    Route::get('/hotels',[HotelController::class, 'show']);
-    Route::post('/hotels/store',[HotelController::class, 'store'])->name('hotel.store');
+    Route::get('/hotels', [HotelController::class, 'show'])->name('hotels');
+    Route::post('/hotels/submit', [HotelController::class, 'store'])->name('hotel.store');
 
     Route::get('/destination',[DistinationController::class, 'showDestination']);
     Route::post('/destination',[DistinationController::class, 'addEditDeleteDestination']);
+
+    Route::get('/driver',[DriverController::class, 'index'])->name('driver.index');
+
 
     Route::get('/permision', [PermissionController::class, 'showPermission']);
     Route::post('/permision', [PermissionController::class, 'addPermission']);

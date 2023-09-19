@@ -26,10 +26,10 @@ class HotelController extends Controller
         }
     }
 
-    public function store(HotelRequest $hotel){
-        hotel::create($hotel->validate());
-
-        return redirect()->route('hotels')->with(['message' => 'Hotel Created']);
+    public function store(HotelRequest $request){
+        return "asdfsdf";
+        hotel::create($request->validate());
+        // return redirect()->route('hotels')->with(['message' => 'Hotel Created']);
 
     }
 }

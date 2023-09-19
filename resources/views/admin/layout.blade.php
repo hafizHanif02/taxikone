@@ -314,7 +314,7 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="/destination" class="side-nav-link">
+                            <a href="{{route('driver.index') }}" class="side-nav-link">
                                 <i class="ri-taxi-wifi-line"></i>
                                 <span class="badge bg-success float-end"></span>
                                 <span>Drivers</span>

@@ -18,7 +18,7 @@
                         <div class="col-12">
                             <div class="page-title-box">
 
-                                <h4 class="page-title">Hotels</h4>
+                                <h4 class="page-title">Driver</h4>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between" >
-                                    <h4 class="header-title">Hotel List</h4>
+                                    <h4 class="header-title">Driver List</h4>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
                                 <div class="card-body">
@@ -39,16 +39,17 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Hote Name</th>
-                                                <th>Controller Username</th>
-                                                <th>Address</th>
+                                                <th>Driver</th>
+                                                <th>Manager Username</th>
+                                                <th>Destination</th>
+                                                <th>Hotel</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
 
                                         <tbody>
-                                            @foreach ($hotels as $htl)
+                                            {{-- @foreach ($hotels as $htl)
                                             <tr>
                                                 <td>{{$htl->id}}</td>
                                                 <td id="name{{$htl->id}}">{{$htl->name}}</td>
@@ -60,7 +61,7 @@
                                                 </td>
 
                                             </tr>
-                                            @endforeach
+                                            @endforeach --}}
 
                                         </tbody>
                                     </table>
@@ -85,8 +86,8 @@
                             <h4 class="modal-title" id="add-modalLabel">Adding New Hotel</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="/hotels/submit" method="POST">
-                            <div class="modal-body">
+                        <form class="ps-3 pe-3" action="{{route('hotel.store')}}" method="POST">
+                        <div class="modal-body">
                                 <div class="mb-3">
                                     @csrf
                                     <div class="row mb-2">
@@ -105,20 +106,20 @@
 
                                 <div class="row mb-2">
                                     <label for="username" class="form-label">Hotel Manager</label>
-                                    <select name="manager_id" id="manager_id" class="form-control">
+                                    <select name="manager_id" id="manager_id">
                                         <option value="" disabled selected>Select Manager</option>
-                                        @foreach($managers  as $manager)
+                                        {{-- @foreach($managers  as $manager)
                                         <option class="form-label" value="{{$manager->id}}">{{$manager->name}}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </form>
+                        </div>
+                        <div class="modal-footer">
+                            {{-- <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button> --}}
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div>
@@ -206,7 +207,7 @@
 @endsection
 
 
-<script>
+{{-- <script>
 
 function setDataToModel(id){
     console.log(id);
@@ -219,4 +220,4 @@ function setDataToModel(id){
 function setDataToModelDelete(id){
     document.getElementById('hotelIDDelete').value = id;
 }
-</script>
+</script> --}}
