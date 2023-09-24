@@ -18,7 +18,7 @@
                         <div class="col-12">
                             <div class="page-title-box">
 
-                                <h4 class="page-title">Driver</h4>
+                                <h4 class="page-title">Manager</h4>
                             </div>
                         </div>
                     </div>
@@ -30,38 +30,33 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between" >
-                                    <h4 class="header-title">Driver List</h4>
+                                    <h4 class="header-title">Manager List</h4>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
                                 <div class="card-body">
                                     <table id="datatable-buttons"
                                         class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>Driver</th>
-                                                <th>Manager Username</th>
-                                                <th>Destination</th>
-                                                <th>Hotel</th>
+                                                <th>Manager</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
 
                                         <tbody>
-                                            {{-- @foreach ($hotels as $htl)
-                                            <tr>
-                                                <td>{{$htl->id}}</td>
-                                                <td id="name{{$htl->id}}">{{$htl->name}}</td>
-                                                <td id="userID{{$htl->id}}">{{$htl->user_id}}</td>
-                                                <td id="address{{$htl->id}}">{{$htl->address}}</td>
+                                            @foreach ($managers as $manager)
+                                            <tr class="text-center">
+                                                <td>{{$manager->id}}</td>
+                                                <td id="name{{$manager->id}}">{{$manager->name}}</td>
                                                 <td class="txt-center">
-                                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$dst->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
-                                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$dst->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
+                                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$manager->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
+                                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$manager->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
                                                 </td>
 
                                             </tr>
-                                            @endforeach --}}
+                                            @endforeach
 
                                         </tbody>
                                     </table>
@@ -86,32 +81,28 @@
                             <h4 class="modal-title" id="add-modalLabel">Adding New Hotel</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="{{route('drivers.store')}}" method="POST">
+                        <form class="ps-3 pe-3" action="{{route('managers.store')}}" method="POST">
                         <div class="modal-body">
                                 <div class="mb-3">
                                     @csrf
                                     <div class="row mb-2">
-                                        <label for="username" class="form-label">Hotel Name</label>
-                                        <input type="hidden" name="type" value="new">
-                                        
-                                        
-                                        <input type="hidden" name="hotelID" value="0">
-                                        <input class="form-control" type="text" name="hotelName" required="" placeholder="hotel Name here">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input class="form-control" type="text" name="name" required="" placeholder="Manager Name here">
                                     </div>
                                 </div>
                                 <div class="row mb-2">
-                                    <label for="username" class="form-label">Hotel Address</label>
-                                    <input type="text" placeholder="hotel address here" class="form-control" name="adress">
+                                    <label for="address" class="form-label">Address</label>
+                                    <input type="text" placeholder="Manager address here" class="form-control" name="address">
                                 </div>
 
                                 <div class="row mb-2">
-                                    <label for="username" class="form-label">Hotel Manager</label>
-                                    <select name="manager_id" id="manager_id">
-                                        <option value="" disabled selected>Select Manager</option>
-                                        {{-- @foreach($managers  as $manager)
-                                        <option class="form-label" value="{{$manager->id}}">{{$manager->name}}</option>
-                                        @endforeach --}}
-                                    </select>
+                                    <label for="username" class="form-label">Manager Username</label>
+                                    <input type="text" placeholder="Manager Username here" class="form-control" name="username">
+                                </div>
+
+                                <div class="row mb-2">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" placeholder="Manager Password here" class="form-control" name="password">
                                 </div>
 
                         </div>

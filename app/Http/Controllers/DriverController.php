@@ -44,7 +44,11 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Driver::create([
+            'hotel_id' => $request->hotel_id,
+            'destination_id' => $request->destination_id,
+            'commission_id' => $request->commission_id,
+        ]);
     }
 
     /**

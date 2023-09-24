@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Manager;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
@@ -14,7 +17,15 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()){
+            $userData = Auth::user();
+
+            if($userData->is_admin){
+                $managers = Manager::get();
+                return view('admin.managers', ['userData'=>$userData,'managers'=>$managers]);
+            }
+            return "asdfdsf";
+        }
     }
 
     /**
@@ -35,7 +46,16 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Manager::create([
+            'name' => $request->name,
+            'address'=> $request->address,
+        ]);
+        User::create([
+            'name'=> $request->name,
+            'username'=> $request->username,
+            'password' => Hash::make($request->password),
+           'is_controller' => 1,
+        ]);
     }
 
     /**

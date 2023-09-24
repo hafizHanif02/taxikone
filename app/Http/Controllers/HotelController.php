@@ -20,16 +20,43 @@ class HotelController extends Controller
             if($userData->is_admin){
                 $hotels = hotel::get();
                 $managers = Manager::all(); 
-                return view('admin.hotels', ['userData'=>$userData, 'hotels' => $hotels,'managers'=> $managers]);
+                return view('admin.hotels', [
+                    'userData'=>$userData, 
+                    'hotels' => $hotels,
+                    'managers'=> $managers
+                ]);
             }
             return "asdfdsf";
         }
     }
 
-    public function store(HotelRequest $request){
-        return "asdfsdf";
-        hotel::create($request->validate());
-        // return redirect()->route('hotels')->with(['message' => 'Hotel Created']);
+    // public function create(){
+    //     if(Auth::check()){
+    //         $userData = Auth::user();
 
+    //         if($userData->is_admin){
+    //             return view('hotel.create', [
+    //                 'userData'=>$userData,
+    //                 'managers' => Manager::all(),
+    //             ]);
+    //         }
+    //     }
+    //     return "asdfdsf";
+    // }
+
+    public function store(Request $request){
+        // return $request;
+        hotel::create([
+            'name' => $request->hotelName,
+            'address' => $request->address,
+            'manager_id' => $request->manager_id,
+        ]);
+        return redirect()->route('hotels')->with(['message' => 'Hotel Created']);
+
+    }
+
+    public function delete($hotelID){
+        hotel::where('id',$hotelID)->delete();
+        return redirect()->route('hotels')->with(['message' => 'Hotel Deleted']);
     }
 }

@@ -307,6 +307,13 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
+                            <a href="/managers" class="side-nav-link">
+                                <i class="ri-user-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Hotel Manager</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
                             <a href="/destination" class="side-nav-link">
                                 <i class="ri-road-map-line"></i>
                                 <span class="badge bg-success float-end"></span>

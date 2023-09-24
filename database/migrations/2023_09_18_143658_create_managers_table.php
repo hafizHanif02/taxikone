@@ -15,6 +15,11 @@ class CreateManagersTable extends Migration
     {
         Schema::create('managers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->integer('driver_id')->nullable();
+            $table->integer('destination_id')->nullable();
+            $table->integer('commission_id')->nullable();
             $table->timestamps();
         });
     }
