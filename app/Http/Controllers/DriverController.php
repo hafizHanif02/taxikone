@@ -4,7 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Carbon;
+
 
 class DriverController extends Controller
 {
@@ -45,10 +52,17 @@ class DriverController extends Controller
     public function store(Request $request)
     {
         Driver::create([
-            'hotel_id' => $request->hotel_id,
-            'destination_id' => $request->destination_id,
-            'commission_id' => $request->commission_id,
+            'name' => $request->name,
         ]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'username'=> $request->username,
+            'password' => Hash::make($request->password),
+            'is_driver' => 1,
+            'email_verified_at' => now(),
+        ]);
+        return redirect()->route('driver.index')->with(['message' => 'Driver Created']);
     }
 
     /**

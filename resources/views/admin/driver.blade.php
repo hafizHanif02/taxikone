@@ -37,31 +37,25 @@
                                     <table id="datatable-buttons"
                                         class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th>ID</th>
                                                 <th>Driver</th>
-                                                <th>Manager Username</th>
-                                                <th>Destination</th>
-                                                <th>Hotel</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
 
                                         <tbody>
-                                            {{-- @foreach ($hotels as $htl)
-                                            <tr>
-                                                <td>{{$htl->id}}</td>
-                                                <td id="name{{$htl->id}}">{{$htl->name}}</td>
-                                                <td id="userID{{$htl->id}}">{{$htl->user_id}}</td>
-                                                <td id="address{{$htl->id}}">{{$htl->address}}</td>
+                                            @foreach ($drivers as $driver)
+                                            <tr class="text-center">
+                                                <td>{{$driver->id}}</td>
+                                                <td id="userID{{$driver->id}}">{{$driver->name}}</td>
                                                 <td class="txt-center">
-                                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$dst->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
-                                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$dst->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
+                                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$driver->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
+                                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$driver->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
                                                 </td>
-
                                             </tr>
-                                            @endforeach --}}
+                                            @endforeach
 
                                         </tbody>
                                     </table>
@@ -83,7 +77,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-modalLabel">Adding New Hotel</h4>
+                            <h4 class="modal-title" id="add-modalLabel">Adding New Driver</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form class="ps-3 pe-3" action="{{route('drivers.store')}}" method="POST">
@@ -91,32 +85,24 @@
                                 <div class="mb-3">
                                     @csrf
                                     <div class="row mb-2">
-                                        <label for="username" class="form-label">Hotel Name</label>
-                                        <input type="hidden" name="type" value="new">
-                                        
-                                        
-                                        <input type="hidden" name="hotelID" value="0">
-                                        <input class="form-control" type="text" name="hotelName" required="" placeholder="hotel Name here">
+                                        <label for="username" class="form-label">Driver Name</label>
+                                        <input class="form-control" type="text" name="name" required="" placeholder="Driver Name here">
                                     </div>
                                 </div>
                                 <div class="row mb-2">
-                                    <label for="username" class="form-label">Hotel Address</label>
-                                    <input type="text" placeholder="hotel address here" class="form-control" name="adress">
+                                    <label for="username" class="form-label">Driver Username</label>
+                                    <input type="text" placeholder="Driver username here" class="form-control" name="username">
                                 </div>
-
                                 <div class="row mb-2">
-                                    <label for="username" class="form-label">Hotel Manager</label>
-                                    <select name="manager_id" id="manager_id">
-                                        <option value="" disabled selected>Select Manager</option>
-                                        {{-- @foreach($managers  as $manager)
-                                        <option class="form-label" value="{{$manager->id}}">{{$manager->name}}</option>
-                                        @endforeach --}}
-                                    </select>
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" placeholder="Driver email here" class="form-control" name="email">
                                 </div>
-
+                                <div class="row mb-2">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" placeholder="Driver password here" class="form-control" name="password">
+                                </div>
                         </div>
                         <div class="modal-footer">
-                            {{-- <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button> --}}
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
@@ -153,7 +139,39 @@
                     </form>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+            </div>
+            
+            
+            <!-- /.modal -->
+
+            <div id="ride-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="add-modalLabel">Assign Ride</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="ps-3 pe-3" action="/permision" method="POST">
+                        <div class="modal-body">
+
+
+                                <div class="mb-3">
+                                    @csrf
+                                    
+                                    
+                                    
+                                    <input class="form-control" type="text" name="hotelName" id="hotelName" required="" placeholder="hotel Name here">
+                                </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
 
             <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel" aria-hidden="true">
                 <div class="modal-dialog">

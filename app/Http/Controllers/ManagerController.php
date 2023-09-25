@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Carbon;
 
 class ManagerController extends Controller
 {
@@ -46,16 +50,21 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         Manager::create([
             'name' => $request->name,
             'address'=> $request->address,
         ]);
         User::create([
             'name'=> $request->name,
+            'email'=> $request->email,
             'username'=> $request->username,
             'password' => Hash::make($request->password),
            'is_controller' => 1,
+           'email_verified_at' => now(),
         ]);
+        return redirect()->route('managers.index')->with(['message' => 'Hotel Created']);
+
     }
 
     /**

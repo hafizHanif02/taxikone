@@ -26,7 +26,8 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/dashboard', [UserController::class, 'dashboard']);
-    Route::get('/rides', [RideController::class, 'showRides']);
+    Route::get('/rides', [RideController::class, 'showRides'])->name('ride.index');
+    Route::post('/rides/store', [RideController::class, 'store'])->name('ride.store');
 
     Route::get('/hotels', [HotelController::class, 'show'])->name('hotels');
     // Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');

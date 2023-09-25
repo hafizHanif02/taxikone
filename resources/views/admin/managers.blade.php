@@ -97,7 +97,12 @@
 
                                 <div class="row mb-2">
                                     <label for="username" class="form-label">Manager Username</label>
-                                    <input type="text" placeholder="Manager Username here" class="form-control" name="username">
+                                    <input type="text" name="username" placeholder="Manager Username for Login" class="form-control" name="username">
+                                </div>
+
+                                <div class="row mb-2">
+                                    <label for="email" class="form-label">Manager Email</label>
+                                    <input type="mail" name="email" placeholder="Manager Email here" class="form-control" name="username">
                                 </div>
 
                                 <div class="row mb-2">

@@ -18,7 +18,7 @@ class HotelController extends Controller
             $userData = Auth::user();
 
             if($userData->is_admin){
-                $hotels = hotel::get();
+                $hotels = hotel::with('manager')->get();
                 $managers = Manager::all(); 
                 return view('admin.hotels', [
                     'userData'=>$userData, 

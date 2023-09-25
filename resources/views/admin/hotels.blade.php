@@ -52,7 +52,7 @@
                                             <tr>
                                                 <td>{{ $htl->id }}</td>
                                                 <td id="name{{ $htl->id }}">{{ $htl->name }}</td>
-                                                <td id="userID{{ $htl->id }}">{{ $htl->user_id }}</td>
+                                                <td id="userID{{ $htl->manager->id }}">{{ $htl->manager->name }}</td>
                                                 <td id="address{{ $htl->id }}">{{ $htl->address }}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal"
