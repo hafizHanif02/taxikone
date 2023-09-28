@@ -52,7 +52,9 @@
                                             <tr>
                                                 <td>{{ $htl->id }}</td>
                                                 <td id="name{{ $htl->id }}">{{ $htl->name }}</td>
+                                                @if($htl->manager)
                                                 <td id="userID{{ $htl->manager->id }}">{{ $htl->manager->name }}</td>
+                                                @endif
                                                 <td id="address{{ $htl->id }}">{{ $htl->address }}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal"

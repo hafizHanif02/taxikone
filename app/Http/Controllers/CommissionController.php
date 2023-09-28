@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hotel;
 use App\Models\commission;
+use App\Models\distination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommissionController extends Controller
 {
@@ -14,7 +17,22 @@ class CommissionController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()){
+            $userData = Auth::user();
+            if($userData->is_admin){
+                $commission = commission::with('hotel')->get();
+                $hotel = hotel::get();
+                $distination = distination::get();
+                return view('admin.comission', [
+                    'userData'=>$userData,
+                    'commissions'=> $commission,
+                    'hotels'=> $hotel,
+                    'distinations'=> $distination,
+                    
+                    ]);
+            }
+            return "asdfdsf";
+        }
     }
 
     /**

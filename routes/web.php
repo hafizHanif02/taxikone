@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RideController;
 use App\Http\Controllers\UserController;
@@ -49,6 +50,9 @@ Route::group(['middleware' => 'auth.custom'], function () {
 
     Route::get('/managers',[ManagerController::class, 'index'])->name('managers.index');
     Route::post('/managers',[ManagerController::class, 'store'])->name('managers.store');
+
+    Route::get('/commission',[CommissionController::class, 'index'])->name('commission.index');
+
     
 });
 
