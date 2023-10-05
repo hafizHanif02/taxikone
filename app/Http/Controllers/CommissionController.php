@@ -20,7 +20,7 @@ class CommissionController extends Controller
         if(Auth::check()){
             $userData = Auth::user();
             if($userData->is_admin){
-                $commission = commission::with('hotel')->get();
+                $commission = commission::with('hotel','destination')->get();
                 $hotel = hotel::get();
                 $distination = distination::get();
                 return view('admin.comission', [
@@ -56,7 +56,7 @@ class CommissionController extends Controller
         // dd($request);
         commission::create([
             'hotel_id' => $request->hotel_id,
-            'distination_id' => $request->destination_id,
+            'destination_id' => $request->destination_id,
             'comission_rate' => $request->commission_rate,
         ]);
         return redirect()->route('commissions.index')->with(['message' => 'Commission Created']);
@@ -115,7 +115,7 @@ class CommissionController extends Controller
 
     // Query your database to get the commission rate based on $hotelId and $destinationId.
     $commissionRate = commission::where('hotel_id', $hotelId)
-        ->where('distination_id', $destinationId)
+        ->where('destination_id', $destinationId)
         ->value('comission_rate');
 
     return response()->json(['commission_rate' => $commissionRate]);

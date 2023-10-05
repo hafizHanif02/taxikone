@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\CommissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RideController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\DistinationController;
-use App\Http\Controllers\ManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,14 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/commissions',[CommissionController::class, 'index'])->name('commissions.index');
     Route::post('/commissions',[CommissionController::class, 'store'])->name('commissions.store');
     Route::get('/get-commission-rate',[ CommissionController::class,'getCommissionRate']);
+
+
+    Route::get('/payments',[PaymentController::class,'index'])->name('payment.index');
+    Route::post('/add_payment/{driver}',[PaymentController::class,'addpay']);
+
+
+
+
 
     
 });

@@ -21,7 +21,7 @@ class RideController extends Controller
                 $destinations = distination::get();
                 $hotels = hotel::get();
                 $drivers = Driver::get();
-                $rides = ride::with(['hotel','destination'])->get();
+                $rides = ride::with(['hotel','destination','driver'])->get();
                 return view('admin.rides', [
                     'userData'=>$userData,
                      'destinations'=> $destinations,
@@ -37,10 +37,10 @@ class RideController extends Controller
     public function store(Request $request){
         ride::create([
             'customer_name' => $request->customer_name,
+            'driver_id' => $request->driver_id,
             'hotel_id' => $request->hotel_id,
             'destination_id' => $request->destination_id,
             'ride_date' => $request->ride_date,
-            'ride_time' => $request->ride_time,
             'comission_rate' => $request->comission_rate,
         ]);
         return redirect()->route('ride.index')->with(['message' => 'Ride Created']);

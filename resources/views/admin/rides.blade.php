@@ -38,10 +38,12 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th>Customer Name</th>
+                                                <th>Driver</th>
                                                 <th>Hotel</th>
                                                 <th>Destination</th>
+                                                <th>Destination Address</th>
                                                 <th>Date</th>
-                                                <th>Time</th>
+                                                <th>Commission Amount</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -49,29 +51,38 @@
 
                                         <tbody>
                                             @foreach($rides as $ride)
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td>
                                                     {{$ride->customer_name}}
-                                                <input type="hidden" class="customer_name{{$ride->id}}" value="{{$ride->customer_name}}">
+                                                <input required type="hidden" class="customer_name{{$ride->id}}" value="{{$ride->customer_name}}">
+                                                </td>
+                                                <td>
+                                                    {{$ride->driver->name}}
+                                                    <input required type="hidden" class="hotel_name{{$ride->id}}" value="{{$ride->driver->name}}">
                                                 </td>
                                                 <td>
                                                     {{$ride->hotel->name}}
-                                                    <input type="hidden" class="hotel_name{{$ride->id}}" value="{{$ride->hotel->name}}">
+                                                    <input required type="hidden" class="hotel_name{{$ride->id}}" value="{{$ride->hotel->name}}">
                                                 </td>
                                                 <td>
                                                     {{$ride->destination->name}}
-                                                    <input type="hidden" class="destination_name{{$ride->id}}" value="{{$ride->destination->name}}">
+                                                    <input required type="hidden" class="destination_name{{$ride->id}}" value="{{$ride->destination->name}}">
+                                                </td>
+                                                <td>
+                                                    {{$ride->destination->address}}
+                                                    <input required type="hidden" class="destination_address{{$ride->id}}" value="{{$ride->destination->address}}">
                                                 </td>
                                                 <td>
                                                     {{$ride->ride_date}}
-                                                    <input type="hidden" class="ride_date{{$ride->id}}" value="{{$ride->ride_date}}">
+                                                    <input required type="hidden" class="ride_date{{$ride->id}}" value="{{$ride->ride_date}}">
 
                                                 </td>
                                                 <td>
-                                                    {{$ride->ride_time}}
-                                                    <input type="hidden" class="ride_time{{$ride->id}}" value="{{$ride->ride_time}}">
+                                                    {{$ride->comission_rate}}
+                                                    <input required type="hidden" class="ride_commission_amount{{$ride->id}}" value="{{$ride->comission_rate}}">
 
                                                 </td>
+                                                
                                                 <td>
                                                     {{-- <button class="btn btn-success" data-bs-toggle="modal" data-cusomter_name="{{$ride->customer_name}}" onclick="OpenRide({{$ride->id}})" data-bs-target="#open-modal">Open Ride</button>
                                                     <button class="btn btn-secondary">Close Ride</button>
@@ -108,16 +119,27 @@
                     </div>
                     <form class="ps-3 pe-3" action="{{route('ride.store')}}" method="POST">
                     <div class="modal-body">
+                        @csrf
                             <div class="mb-3">
-                                @csrf
                                 <div class="row mb-2">
                                     <label for="customer_name" class="form-label">Customer Name</label>
-                                    <input class="form-control" type="text" name="customer_name" required="" placeholder="Customer Name here">
+                                    <input  class="form-control" type="text" name="customer_name"  placeholder="Customer Name here">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row mb-2">
+                                    <label for="customer_name" class="form-label">Choose Driver</label>
+                                    <select required class="form-control" name="driver_id" id="driver_id">
+                                        <option value="" selected disabled >What is your Driver</option>
+                                        @foreach($drivers as $driver)
+                                        <option value="{{$driver->id}}">{{$driver->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label for="hotel_id" class="form-label">Choose Your Hotel </label>
-                                <select class="form-control" name="hotel_id" id="hotel_id">
+                                <select required class="form-control" name="hotel_id" id="hotel_id">
                                     <option value="" selected disabled >What is your Hotel</option>
                                     @foreach($hotels as $hotel)
                                     <option value="{{$hotel->id}}">{{$hotel->name}}</option>
@@ -126,7 +148,7 @@
                             </div>
                             <div class="row mb-2">
                                 <label for="destination_id" class="form-label">Choose Destination</label>
-                                <select class="form-control" name="destination_id" id="destination_id">
+                                <select required class="form-control" name="destination_id" id="destination_id">
                                     <option value="" selected disabled >What is your Destination</option>
                                     @foreach($destinations as $destination)
                                     <option value="{{$destination->id}}">{{$destination->name}}</option>
@@ -135,16 +157,16 @@
                             </div>
                             <div class="row mb-2">
                                 <label for="destination_id" class="form-label">Commission Amount</label>
-                                <input type="text" readonly id="commission_amount" name="comission_rate" class="form-control" >
+                                <input required type="text" readonly id="commission_amount" name="comission_rate" class="form-control" >
                             </div>
                             <div class="row mb-2">
                                 <label for="ride_date" class="form-label">Ride Date</label>
-                                <input type="date" placeholder="Ride Date here" class="form-control" name="ride_date">
+                                <input required type="date" placeholder="Ride Date here" value="{{ date('Y-m-d') }}" class="form-control" name="ride_date">
                             </div>
-                            <div class="row mb-2">
+                            {{-- <div class="row mb-2">
                                 <label for="ride_time" class="form-label">Ride Time</label>
-                                <input type="time" placeholder="Ride Time password here" class="form-control" name="ride_time">
-                            </div>
+                                <input required type="time" placeholder="Ride Time password here" class="form-control" name="ride_time">
+                            </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save changes</button>
@@ -194,11 +216,11 @@
                                 </table>
 
                                 <form class="ps-3 pe-3" action="{{route('ride.store')}}" method="POST">
-                                    <input type="hidden" name="ride_id" class="ride_id">
+                                    <input required type="hidden" name="ride_id" class="ride_id">
                                     <div class="row mb-2">
                                         <div class="col-md-12">
                                             <label for="driver_id">Assign Driver</label></label><span class="text-danger">*</span>
-                                            <select class="form-control" name="driver_id" id="driver_id">
+                                            <select required class="form-control" name="driver_id" id="driver_id">
                                                 <option value="" selected disabled>Choose Driver</option>
                                                 @foreach($drivers as $driver)
                                                 <option value="{{$driver->id}}">{{$driver->name}}</option>
@@ -209,23 +231,23 @@
                                     <div class="row mb-3 mt-3">
                                         <div class="col-md-6">
                                             <label for="commission_amount">Commsison Amount</label><span class="text-danger">*</span>
-                                            <input class="form-control" placeholder="Enter Commission" type="number" name="commission_amount" value="0" onkeyup="CommissionAmount()" id="commission_amount">
+                                            <input required class="form-control" placeholder="Enter Commission" type="number" name="commission_amount" value="0" onkeyup="CommissionAmount()" id="commission_amount">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="hotel_commission_amount">Hotel Commsison Amount</label></label><span class="text-danger">*</span>
-                                            <input class="form-control" id="hotel_commission_amount" type="number" placeholder="Enter Hotel Commission" onkeyup="HotelCommissionAmount()" value="0" id="hotel_commission_amount" name="hotel_commission_amount">
+                                            <input required class="form-control" id="hotel_commission_amount" type="number" placeholder="Enter Hotel Commission" onkeyup="HotelCommissionAmount()" value="0" id="hotel_commission_amount" name="hotel_commission_amount">
                                         </div>
                                     </div>
                                     <div class="row mb-3 mt-3">
                                         <div class="col-md-12">
                                             <label for="total_amount">Ride Fee</label></label><span class="text-danger">*</span>
-                                            <input type="numnber" value="0" name="ride_fee" id="ride_fee" onkeyup="Fee()" class="form-control" placeholder="Enter Ride Fees" >
+                                            <input required type="numnber" value="0" name="ride_fee" id="ride_fee" onkeyup="Fee()" class="form-control" placeholder="Enter Ride Fees" >
                                         </div>
                                     </div>
                                     <div class="row mb-3 mt-3">
                                         <div class="col-md-12">
                                             <label for="total_amount">Total Cost</label>
-                                            <input type="numnber" value="0" readonly  name="total_cost" id="total_cost" class="form-control" >
+                                            <input required type="numnber" value="0" readonly  name="total_cost" id="total_cost" class="form-control" >
                                         </div>
                                     </div>
                                 </div>

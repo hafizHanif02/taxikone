@@ -52,9 +52,11 @@
                                             <tr>
                                                 <td>{{ $htl->id }}</td>
                                                 <td id="name{{ $htl->id }}">{{ $htl->name }}</td>
+                                                <td
                                                 @if($htl->manager)
-                                                <td id="userID{{ $htl->manager->id }}">{{ $htl->manager->name }}</td>
+                                                 id="userID{{ $htl->manager->id }}">{{ $htl->manager->name }}
                                                 @endif
+                                            </td>
                                                 <td id="address{{ $htl->id }}">{{ $htl->address }}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal"
@@ -65,8 +67,8 @@
                                                         data-bs-target="#delete-modal"
                                                         onclick="setDataToModelDelete({{ $htl->id }})"
                                                         title="Delete"><i class="ri-delete-bin-line"></i></button> --}}
-                                                    <a href="{{route('hotels.delete',$htl->id)}}"><button class="btn btn-danger"><i class="ri-delete-bin-line"></i></button></a>                                                </td>
-
+                                                    <a href="{{route('hotels.delete',$htl->id)}}"><button class="btn btn-danger"><i class="ri-delete-bin-line"></i></button></a>                                                
+                                                </td>
                                             </tr>
                                         @endforeach
 
