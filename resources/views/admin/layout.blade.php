@@ -336,7 +336,7 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="/commission" class="side-nav-link">
+                            <a href="/commissions" class="side-nav-link">
                                 <i class="ri-hand-coin-line"></i>
                                 <span class="badge bg-success float-end"></span>
                                 <span>Commissions</span>

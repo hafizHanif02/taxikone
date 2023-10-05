@@ -53,7 +53,13 @@ class CommissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        commission::create([
+            'hotel_id' => $request->hotel_id,
+            'distination_id' => $request->destination_id,
+            'comission_rate' => $request->commission_rate,
+        ]);
+        return redirect()->route('commissions.index')->with(['message' => 'Commission Created']);
     }
 
     /**
@@ -100,4 +106,18 @@ class CommissionController extends Controller
     {
         //
     }
+
+
+    public function getCommissionRate(Request $request)
+{
+    $hotelId = $request->input('hotel_id');
+    $destinationId = $request->input('destination_id');
+
+    // Query your database to get the commission rate based on $hotelId and $destinationId.
+    $commissionRate = commission::where('hotel_id', $hotelId)
+        ->where('distination_id', $destinationId)
+        ->value('comission_rate');
+
+    return response()->json(['commission_rate' => $commissionRate]);
+}
 }

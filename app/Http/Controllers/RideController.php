@@ -41,6 +41,7 @@ class RideController extends Controller
             'destination_id' => $request->destination_id,
             'ride_date' => $request->ride_date,
             'ride_time' => $request->ride_time,
+            'comission_rate' => $request->comission_rate,
         ]);
         return redirect()->route('ride.index')->with(['message' => 'Ride Created']);
     }

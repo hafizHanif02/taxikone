@@ -73,9 +73,9 @@
 
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-success" data-bs-toggle="modal" data-cusomter_name="{{$ride->customer_name}}" onclick="OpenRide({{$ride->id}})" data-bs-target="#open-modal">Open Ride</button>
+                                                    {{-- <button class="btn btn-success" data-bs-toggle="modal" data-cusomter_name="{{$ride->customer_name}}" onclick="OpenRide({{$ride->id}})" data-bs-target="#open-modal">Open Ride</button>
                                                     <button class="btn btn-secondary">Close Ride</button>
-                                                    <button class="btn btn-danger">Cancel Ride</button>
+                                                    <button class="btn btn-danger">Cancel Ride</button> --}}
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -132,6 +132,10 @@
                                     <option value="{{$destination->id}}">{{$destination->name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="row mb-2">
+                                <label for="destination_id" class="form-label">Commission Amount</label>
+                                <input type="text" readonly id="commission_amount" name="comission_rate" class="form-control" >
                             </div>
                             <div class="row mb-2">
                                 <label for="ride_date" class="form-label">Ride Date</label>
@@ -276,5 +280,26 @@
                 var total_amount = parseFloat(RideFee)+parseFloat(totalCost);
                 $('#total_cost').val(total_amount);
             }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#hotel_id, #destination_id').change(function() {
+                    var hotelId = $('#hotel_id').val();
+                    var destinationId = $('#destination_id').val();
+        
+                    if (hotelId && destinationId) {
+                        $.get('/get-commission-rate', { hotel_id: hotelId, destination_id: destinationId }, function(data) {
+                            if (data.commission_rate) {
+                                $('#commission_amount').val(data.commission_rate);
+                            } else {
+                                $('#commission_amount').val('Commission rate not found');
+                            }
+                        });
+                    } else {
+                        $('#commission_amount').val('');
+                    }
+                });
+            });
         </script>
 @endsection

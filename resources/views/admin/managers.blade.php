@@ -155,18 +155,17 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="delete-modalLabel">Delete hotel</h4>
+                            <h4 class="modal-title" id="delete-modalLabel">Delete Manager</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="/permision" method="POST">
+                        <form class="ps-3 pe-3" id="delete-form" action="" method="POST">
                         <div class="modal-body">
 
 
                                 <div class="mb-3">
                                     @csrf
                                     <label for="username" class="form-label">Are you sure, you want to delete this hotel ?</label>
-                                    <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" id="hotelIDDelete" name="hotelID" value="0">
+                                    <input type="hidden" id="manager_id" name="manager_id" >
 
 
                                 </div>
@@ -203,17 +202,17 @@
 @endsection
 
 
-{{-- <script>
+<script>
 
 function setDataToModel(id){
     console.log(id);
     let hotelName = document.getElementById('name'+id).innerHTML;
     console.log(hotelName);
     document.getElementById('hotelName').value = hotelName;
-    document.getElementById('hotelID').value = id;
+    document.getElementById('manager_id').value = id;
 }
 
 function setDataToModelDelete(id){
     document.getElementById('hotelIDDelete').value = id;
 }
-</script> --}}
+</script>

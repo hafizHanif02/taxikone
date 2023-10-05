@@ -109,6 +109,8 @@ class ManagerController extends Controller
      */
     public function destroy(Manager $manager)
     {
-        //
+        $manager->delete();
+        return redirect()->route('managers.index')->with(['message' => 'Manager Deleted']);
+
     }
 }

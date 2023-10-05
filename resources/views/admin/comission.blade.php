@@ -41,8 +41,7 @@
                                                 <th>ID</th>
                                                 <th>Hotel</th>
                                                 <th>Destination</th>
-                                                <th>Commission Amount</th>
-                                                <th>Cost</th>
+                                                <th>Comission Rate</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -56,6 +55,7 @@
                                                 <td>{{$commission->id}}</td>
                                                 <td id="name{{$commission->id}}">{{$commission->hotel->name}}</td>
                                                 <td id="address{{$commission->id}}">{{$commission->address}}</td>
+                                                <td id="commission{{$commission->id}}">{{$commission->comission_rate}}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$commission->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$commission->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
@@ -87,7 +87,7 @@
                             <h4 class="modal-title" id="add-modalLabel">Adding New Commission</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="" method="POST">
+                        <form class="ps-3 pe-3" action="/commissions" method="POST">
                         <div class="modal-body">
 
 
@@ -109,6 +109,9 @@
                                         <option value="{{$destination->id}}">{{$destination->name}}</option>
                                         @endforeach
                                     </select>
+                                    <br>
+                                    <label for="commission_rate" class="form-label" >Commission Rate</label>
+                                    <input type="number" name="commission_rate" id="commission_rate" class="form-control" placeholder="Enter Comission Rate">
                                 </div>
 
                         </div>

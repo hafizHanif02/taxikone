@@ -51,7 +51,9 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/managers',[ManagerController::class, 'index'])->name('managers.index');
     Route::post('/managers',[ManagerController::class, 'store'])->name('managers.store');
 
-    Route::get('/commission',[CommissionController::class, 'index'])->name('commission.index');
+    Route::get('/commissions',[CommissionController::class, 'index'])->name('commissions.index');
+    Route::post('/commissions',[CommissionController::class, 'store'])->name('commissions.store');
+    Route::get('/get-commission-rate',[ CommissionController::class,'getCommissionRate']);
 
     
 });
