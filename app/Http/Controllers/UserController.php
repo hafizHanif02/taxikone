@@ -49,6 +49,9 @@ class UserController extends Controller
             if($userData->is_admin){
                 return view('admin.dashboard', ['userData'=>$userData]);
             }
+            elseif($userData->is_controller == 1){
+                return view('controller.dashboard', ['userData'=>$userData]);
+            }
         }
         return "asdfdsf";
     }

@@ -59,4 +59,17 @@ class HotelController extends Controller
         hotel::where('id',$hotelID)->delete();
         return redirect()->route('hotels')->with(['message' => 'Hotel Deleted']);
     }
+
+    public function myhotels($controller){
+        if(Auth::check()){
+            $userData = Auth::user();
+                $hotels = hotel::where('manager_id',$controller)->with('manager')->get();
+                return view('admin.hotels', [
+                    'userData'=>$userData, 
+                    'hotels' => $hotels,
+                ]);
+            
+            return "asdfdsf";
+        }
+    }
 }

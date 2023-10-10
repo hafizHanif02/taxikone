@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/payments',[PaymentController::class,'index'])->name('payment.index');
     Route::post('/add_payment/{driver}',[PaymentController::class,'addpay']);
 
+    Route::get('controller/hotels/{controllerID}',[HotelController::class,'myhotels']);
+
 
 
 
