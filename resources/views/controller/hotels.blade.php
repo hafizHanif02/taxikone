@@ -1,6 +1,6 @@
 @extends('controller.layout') <!-- Extend the layout file -->
 
-@section('title', 'Admin Dashboard') <!-- Define the title -->
+@section('title', 'Hotel List') <!-- Define the title -->
 
 @section('content') <!-- Fill in the content section -->
 
@@ -118,13 +118,9 @@
 
                             <div class="row mb-2">
                                 <label for="username" class="form-label">Hotel Manager</label>
-                                <select name="manager_id" id="manager_id" name="manager_id" class="form-control">
-                                    <option value="" disabled selected>Select Manager</option>
-                                    @foreach ($managers as $manager)
-                                        <option class="form-label" value="{{ $manager->id }}">{{ $manager->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" class="form-control" disabled  value="{{$userData->name }}">
+                                <input type="hidden" class="form-control"  name="manager_id" id="manager_id" value="{{$userData->id }}">
+                                <input type="hidden" class="form-control"  name="user_id" id="user_id" value="{{$userData->id}}">
                             </div>
 
                         </div>
@@ -139,7 +135,7 @@
         <!-- /.modal -->
         {{-- Models end here --}}
 
-        <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel"
+        {{-- <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -168,9 +164,9 @@
                     </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        </div><!-- /.modal --> --}}
 
-        <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel"
+        {{-- <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -200,7 +196,7 @@
                     </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        </div><!-- /.modal --> --}}
         {{-- Models end here --}}
         <!-- Footer Start -->
         <footer class="footer">

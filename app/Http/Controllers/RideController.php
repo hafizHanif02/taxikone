@@ -30,6 +30,40 @@ class RideController extends Controller
                      'drivers'=> $drivers,
                     ]);
             }
+            elseif($userData->is_controller){
+                $hotelIds = hotel::where('user_id',$userData->id)->pluck('id');
+                $destinations = distination::get();
+                $hotels = hotel::where('user_id',$userData->id)->get();
+                $drivers = Driver::get();
+                $rides = ride::whereIn('hotel_id',$hotelIds)->with(['hotel','destination','driver'])->get();
+                return view('controller.rides', [
+                    'userData'=>$userData,
+                     'destinations'=> $destinations,
+                     'hotels' => $hotels,
+                     'rides' => $rides,
+                     'drivers'=> $drivers,
+                    ]);
+            }
+        }
+    }
+
+    public function myshowRides(Request $request){
+        if(Auth::check()){
+            $userData = Auth::user();
+            if($userData->is_controller == 1){
+                $hotelIds = hotel::where('user_id',$request->user_id)->pluck('id');
+                $destinations = distination::get();
+                $hotels = hotel::where('user_id',$request->user_id)->get();
+                $drivers = Driver::get();
+                $rides = ride::whereIn('hotel_id',$hotelIds)->with(['hotel','destination','driver'])->get();
+                return view('controller.rides', [
+                    'userData'=>$userData,
+                     'destinations'=> $destinations,
+                     'hotels' => $hotels,
+                     'rides' => $rides,
+                     'drivers'=> $drivers,
+                    ]);
+            }
             return "asdfdsf";
         }
     }

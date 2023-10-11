@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ride;
+use App\Models\hotel;
 use App\Models\payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,13 @@ class PaymentController extends Controller
             DB::raw('COUNT(*) as number_of_rides'),
             DB::raw('SUM(comission_rate) as total_commission'),
         )
+        ->groupBy('hotel_id')->with('hotel')->get();
+
+        $hotelPayAll = ride::select(
+            DB::raw('hotel_id as hotel_id'),
+            DB::raw('COUNT(*) as number_of_rides'),
+            DB::raw('SUM(comission_rate) as total_commission'),
+        )
         ->groupBy('hotel_id')->where(['hotel_paid' => 0])->with('hotel')->get();
 
 
@@ -34,6 +42,7 @@ class PaymentController extends Controller
         
         foreach($hotelDataAll as $allData){
             $isFound = false;
+            $isFound2 = false;
             foreach($hotelDataPayable as $payableData){
                 
                 if($allData->hotel_id == $payableData->hotel_id){
@@ -45,6 +54,20 @@ class PaymentController extends Controller
             }
             if(!$isFound){
                 $allData->payable_amount = '0';
+                $allData->payable_ride = '0';
+            }
+
+            foreach($hotelPayAll as $payData){
+                if($allData->hotel_id == $payableData->hotel_id){
+                    $allData->pay_amount = $payableData->total_commission;
+                    $allData->pay_ride = $payableData->number_of_rides;
+                    $isFound2 = true;
+                    break;
+                }
+            }
+            if(!$isFound2){
+                $allData->pay_amount = '0';
+                $allData->pay_ride = '0';
             }
         }
 
@@ -63,16 +86,16 @@ class PaymentController extends Controller
         ->groupBy('driver_id')->where(['driver_paid' => 1])->with('driver')->get();
         
         foreach($driverDataAll as $driverAll){
-            $isFound2 = false;
+            $isFound = false;
             foreach($driverDataPaid as $driverPaid){
                 if($driverAll->driver_id == $driverPaid->driver_id){
-                    $driverAll->paid_ride = $driverPaid->number_of_rides;
+                    $driverAll->balance_comission = $driverAll->total_commission -  $driverPaid->total_commission;
                     $isFound = true;
                     break;
                 }
             }
-            if(!$isFound2){
-                $driverAll->paid_ride = '0';
+            if(!$isFound){
+                $driverAll->balance_comission = '0';
             }
         }
         // dd($hotelData);
@@ -85,16 +108,126 @@ class PaymentController extends Controller
                     'driverDatas'=>$driverDataAll,
                     ]);
             }
-            return "asdfdsf";
+            elseif($userData->is_controller){
+                    $hotelIds = hotel::where('manager_id', $userData->id)->pluck('id');
+                    $hotelDataAll = ride::whereIn('hotel_id',$hotelIds)->select(
+                        DB::raw('hotel_id as hotel_id'),
+                        DB::raw('COUNT(*) as number_of_rides'),
+                        DB::raw('SUM(comission_rate) as total_commission'),
+                        )
+                        ->groupBy('hotel_id')->with('hotel')->get();
+            
+                    $hotelPayAll = ride::whereIn('hotel_id',$hotelIds)->select(
+                        DB::raw('hotel_id as hotel_id'),
+                        DB::raw('COUNT(*) as number_of_rides'),
+                        DB::raw('SUM(comission_rate) as total_commission'),
+                    )
+                    ->groupBy('hotel_id')->where(['hotel_paid' => 0])->with('hotel')->get();
+            
+            
+                    $hotelDataPayable = ride::whereIn('hotel_id',$hotelIds)->select(
+                        DB::raw('hotel_id as hotel_id'),
+                        DB::raw('COUNT(*) as number_of_rides'),
+                        DB::raw('SUM(comission_rate) as total_commission'),
+                    )
+                    ->groupBy('hotel_id')->where(['hotel_paid' => 0,'driver_paid' => 1])->with('hotel')->get();
+                    
+                    foreach($hotelDataAll as $allData){
+                        $isFound = false;
+                        $isFound2 = false;
+                        foreach($hotelDataPayable as $payableData){
+                            if($allData->hotel_id == $payableData->hotel_id){
+                                $allData->payable_amount = $payableData->total_commission;
+                                $allData->payable_ride = $payableData->number_of_rides;
+                                $isFound = true;
+                                break;
+                            }
+                        }
+                        if(!$isFound){
+                            $allData->payable_amount = '0';
+                            $allData->payable_ride = '0';
+                        }
+            
+                        foreach($hotelPayAll as $payData){
+                            if($allData->hotel_id == $payData->hotel_id){
+                                $allData->pay_amount = $payData->total_commission;
+                                $allData->pay_ride = $payData->number_of_rides;
+                                $isFound2 = true;
+                                break;
+                            }
+                        }
+                        if(!$isFound2){
+                            $allData->pay_amount = '0';
+                            $allData->pay_ride = '0';
+                        }
+                    }
+            
+                    $driverDataAll = ride::whereIn('hotel_id',$hotelIds)->select(
+                        DB::raw('driver_id as driver_id'),
+                        DB::raw('COUNT(*) as number_of_rides'),
+                        DB::raw('SUM(comission_rate) as total_commission'),
+                    )
+                    ->groupBy('driver_id')->with('driver')->get();
+            
+                    $driverDataPaid = ride::whereIn('hotel_id',$hotelIds)->select(
+                        DB::raw('driver_id as driver_id'),
+                        DB::raw('COUNT(*) as number_of_rides'),
+                        DB::raw('SUM(comission_rate) as total_commission'),
+                    )
+                    ->groupBy('driver_id')->where(['driver_paid' => 1])->with('driver')->get();
+                    
+                    foreach($driverDataAll as $driverAll){
+                        $isFound = false;
+                        foreach($driverDataPaid as $driverPaid){
+                            if($driverAll->driver_id == $driverPaid->driver_id){
+                                $driverAll->balance_comission = $driverAll->total_commission -  $driverPaid->total_commission;
+                                $isFound = true;
+                                break;
+                            }
+                        }
+                        if(!$isFound){
+                            $driverAll->balance_comission = '0';
+                        }
+                    }
+                    return view('controller.payment', [
+                        'userData'=>$userData,
+                        'hotelDatas'=>$hotelDataAll,
+                        'driverDatas'=>$driverDataAll,
+                        ]);
+             }
+
         }
     }
 
+  
     public function addpay(Request $request){
         ride::where(['driver_id' => $request->id, 'driver_paid' => 0 ])->update([
             'driver_paid' => 1
         ]);
         return redirect()->route('payment.index')->with(['message' => 'Payments Created']);
     }
+    public function addpayController(Request $request){
+        ride::where(['driver_id' => $request->id, 'driver_paid' => 0 ])->update([
+            'driver_paid' => 1
+        ]);
+        return redirect()->route('dashboard')->with(['message' => 'Payments Created']);
+    }
+
+    public function addpayhotel(Request $request){
+        // dd($request);
+        ride::where(['hotel_id' => $request->id, 'hotel_paid' => 0 ,'driver_paid'=>1])->update([
+            'hotel_paid' => 1
+        ]);
+        return redirect()->route('payment.index')->with(['message' => 'Payments Created']);
+    }
+    public function addpayhotelController(Request $request){
+        ride::where(['hotel_id' => $request->id, 'hotel_paid' => 0 ,'driver_paid'=>1])->update([
+            'hotel_paid' => 1
+        ]);
+        
+        return redirect()->route('payment.index')->with(['message' => 'Payments Created']);
+    }
+    
 
     /**
      * Show the form for creating a new resource.

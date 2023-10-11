@@ -1,6 +1,6 @@
-@extends('admin.layout') <!-- Extend the layout file -->
+@extends('controller.layout') <!-- Extend the layout file -->
 
-@section('title', 'Payments') <!-- Define the title -->
+@section('title', 'Payment List') <!-- Define the title -->
 
 @section('content') <!-- Fill in the content section -->
 
@@ -222,11 +222,11 @@
         <script>
             function addpayment(id){
                 console.log(id);
-                $('#payment_form').attr('action', 'add_payment/' + id);
+                $('#payment_form').attr('action', '/add_paymentc/' + id);
                 $('#payment_form_input').val(id);
             }
-            function addpaymenthotel(id){
-                $('#payment_form_hotel').attr('action', 'add_payment_hotel/' + id);
+            function addpaymenthotel(id) {
+                $('#payment_form_hotel').attr('action', '/add_payment_hotelc/' + id); // Remove '/controller' from here
                 $('#payment_form_hotel_input').val(id);
             }
         </script>

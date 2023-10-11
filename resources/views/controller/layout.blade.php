@@ -300,7 +300,7 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="/controller/hotels/{{$userData->id}}" class="side-nav-link">
+                            <a href="/hotels" class="side-nav-link">
                                 <i class="ri-hotel-line"></i>
                                 <span class="badge bg-success float-end"></span>
                                 <span>Hotel</span>
@@ -320,21 +320,21 @@
                                 <span>Destinations</span>
                             </a>
                         </li>
-                        <li class="side-nav-item">
+                        {{-- <li class="side-nav-item">
                             <a href="{{route('driver.index') }}" class="side-nav-link">
                                 <i class="ri-taxi-wifi-line"></i>
                                 <span class="badge bg-success float-end"></span>
                                 <span>Drivers</span>
                             </a>
-                        </li>
-                         <li class="side-nav-title">Finance</li>
-                      {{--  <li class="side-nav-item">
+                        </li> --}}
+                        <li class="side-nav-title">Finance</li>
+                        <li class="side-nav-item">
                             <a href="/payments" class="side-nav-link">
                                 <i class="ri-money-euro-box-line"></i>
                                 <span class="badge bg-success float-end"></span>
                                 <span>Payments</span>
                             </a>
-                        </li> --}}
+                        </li>
                         <li class="side-nav-item">
                             <a href="/commissions" class="side-nav-link">
                                 <i class="ri-hand-coin-line"></i>
@@ -343,21 +343,21 @@
                             </a>
                         </li>
 
-                            {{-- <li class="side-nav-title">Settings</li>
-                            <li class="side-nav-item">
-                                <a href="/users" class="side-nav-link">
-                                    <i class="ri-group-line"></i>
-                                    <span class="badge bg-success float-end"></span>
-                                    <span>Users</span>
-                                </a>
-                            </li>
-                            <li class="side-nav-item">
-                                <a href="/permision" class="side-nav-link">
-                                    <i class="ri-lock-2-line"></i>
-                                    <span class="badge bg-success float-end"></span>
-                                    <span>Permision</span>
-                                </a>
-                            </li> --}}
+                        {{-- <li class="side-nav-title">Settings</li>
+                        <li class="side-nav-item">
+                            <a href="/users" class="side-nav-link">
+                                <i class="ri-group-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="/permision" class="side-nav-link">
+                                <i class="ri-lock-2-line"></i>
+                                <span class="badge bg-success float-end"></span>
+                                <span>Permision</span>
+                            </a>
+                        </li> --}}
 
                     </ul>
                     <!--- End Sidemenu -->

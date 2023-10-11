@@ -25,9 +25,20 @@ class HotelController extends Controller
                     'hotels' => $hotels,
                     'managers'=> $managers
                 ]);
+            }else if($userData->is_controller){
+                
+            $hotels = hotel::where('manager_id',$userData->id)->with('manager')->get();
+            $manager = Manager::where('id',$userData->id)->first();
+            // dd($manager);
+                return view('controller.hotels', [
+                    'userData'=>$userData, 
+                    'hotels' => $hotels,
+                    // 'manager' => $manager,
+                ]);
             }
-            return "asdfdsf";
+            
         }
+       
     }
 
     // public function create(){
@@ -50,6 +61,7 @@ class HotelController extends Controller
             'name' => $request->hotelName,
             'address' => $request->address,
             'manager_id' => $request->manager_id,
+            'user_id' => $request->user_id,
         ]);
         return redirect()->route('hotels')->with(['message' => 'Hotel Created']);
 
@@ -60,13 +72,17 @@ class HotelController extends Controller
         return redirect()->route('hotels')->with(['message' => 'Hotel Deleted']);
     }
 
-    public function myhotels($controller){
+    public function myhotels(Request $request){
+        // dd($request);
         if(Auth::check()){
             $userData = Auth::user();
-                $hotels = hotel::where('manager_id',$controller)->with('manager')->get();
-                return view('admin.hotels', [
+            $hotels = hotel::where('manager_id',$userData->id)->with('manager')->get();
+            $manager = Manager::where('id',$request->user_id)->first();
+            // dd($manager);
+                return view('controller.hotels', [
                     'userData'=>$userData, 
                     'hotels' => $hotels,
+                    // 'manager' => $manager,
                 ]);
             
             return "asdfdsf";

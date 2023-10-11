@@ -31,6 +31,19 @@ class CommissionController extends Controller
                     
                     ]);
             }
+            elseif($userData->is_controller){
+                $hotelIds = hotel::where('user_id',$userData->id)->pluck('id');
+                $commission = commission::whereIn('hotel_id',$hotelIds)->with('hotel','destination')->get();
+                $hotel = hotel::where('user_id',$userData->id)->get();
+                $distination = distination::get();
+                return view('controller.comission', [
+                    'userData'=>$userData,
+                    'commissions'=> $commission,
+                    'hotels'=> $hotel,
+                    'distinations'=> $distination,
+                    
+                    ]);
+            }
             return "asdfdsf";
         }
     }

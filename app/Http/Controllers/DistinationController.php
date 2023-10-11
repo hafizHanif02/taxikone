@@ -17,7 +17,10 @@ class DistinationController extends Controller
                 $dest = distination::get();
                 return view('admin.destination', ['userData'=>$userData, 'dest'=> $dest]);
             }
-            return "asdfdsf";
+            if($userData->is_controller){
+                $dest = distination::get();
+                return view('controller.destination', ['userData'=>$userData, 'dest'=> $dest]);
+            }
         }
     }
 
@@ -47,7 +50,7 @@ class DistinationController extends Controller
 
                 return redirect()->back();
             }
-            return redirect('/dashboard');
+            return redirect('/destination');
         }
         return redirect('/login');
     }
