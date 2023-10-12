@@ -33,7 +33,7 @@
                                             <i class="ri-taxi-line widget-icon"></i>
                                         </div>
                                         <h6 class="text-uppercase mt-0" title="Customers">Rides</h6>
-                                        <h2 class="my-2">8,652</h2>
+                                        <h2 class="my-2">{{$rides }}</h2>
                                         <p class="mb-0">
                                             {{-- <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
                                             <span class="text-nowrap">Since last month</span> --}}
@@ -49,7 +49,7 @@
                                             <i class="ri-hotel-line widget-icon"></i>
                                         </div>
                                         <h6 class="text-uppercase mt-0" title="Customers">Hotels</h6>
-                                        <h2 class="my-2">254</h2>
+                                        <h2 class="my-2">{{$hotels }}</h2>
                                         <p class="mb-0">
                                             {{-- <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
                                             <span class="text-nowrap">Since last month</span> --}}
@@ -65,7 +65,7 @@
                                             <i class="ri-road-map-line widget-icon"></i>
                                         </div>
                                         <h6 class="text-uppercase mt-0" title="Customers">Destination</h6>
-                                        <h2 class="my-2">753</h2>
+                                        <h2 class="my-2">{{$distinations }}</h2>
                                         <p class="mb-0">
                                             {{-- <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
                                             <span class="text-nowrap">Since last month</span> --}}
@@ -81,7 +81,7 @@
                                             <i class="ri-taxi-wifi-line widget-icon"></i>
                                         </div>
                                         <h6 class="text-uppercase mt-0" title="Customers">Drivers</h6>
-                                        <h2 class="my-2">154</h2>
+                                        <h2 class="my-2">{{$drivers }}</h2>
                                         <p class="mb-0">
                                             {{-- <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
                                             <span class="text-nowrap">Since last month</span> --}}
