@@ -19,7 +19,7 @@ class CreateRidesTable extends Migration
             $table->string('customer_name');
             $table->date('ride_date');
             $table->time('ride_time');
-            $table->integer('hotel_id')->unsigned()->nullable()->default(0);
+            $table->integer('hotel_id');
             $table->integer('destination_id')->nullable()->default(0);
             $table->double('comission_rate', 15, 8)->nullable()->default(0);
             $table->integer('driver_id')->nullable()->default(0);
