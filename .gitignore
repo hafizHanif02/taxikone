@@ -22,3 +22,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 db_design.xlsx
+module_timeline.xlsx
