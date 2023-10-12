@@ -23,7 +23,7 @@ class RideController extends Controller
                 $drivers = Driver::get();
                 $rides = ride::with(['hotel','destination','driver'])->get();
 
-                return $rides;
+                    
                 return view('admin.rides', [
                     'userData'=>$userData,
                      'destinations'=> $destinations,
