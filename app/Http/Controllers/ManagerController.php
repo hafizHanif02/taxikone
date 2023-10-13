@@ -56,7 +56,7 @@ class ManagerController extends Controller
             'email'=> $request->email,
             'username'=> $request->username,
             'password' => Hash::make($request->password),
-            'is_controller' => 1,
+            'is_controller' => '1',
            'email_verified_at' => now(),
         ]);
         return redirect()->route('managers.index')->with(['message' => 'Manager Created']);
@@ -68,7 +68,7 @@ class ManagerController extends Controller
             'name'=> $request->name,
             'email'=> $request->email,
             'username'=> $request->username,
-            'is_controller' => 1,
+            'is_controller' => '1',
            'email_verified_at' => now(),
         ]);
         return redirect()->route('managers.index')->with(['message' => 'Manager Update']);
