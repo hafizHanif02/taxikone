@@ -17,6 +17,10 @@ class User extends Authenticatable
         'username',  
         'email',
         'password',
+        'is_controller',
+        'is_driver',
+        'is_hotel',
+        'is_admin',
     ];
 
     /**
