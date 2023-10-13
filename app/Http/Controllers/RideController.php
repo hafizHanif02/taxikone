@@ -20,7 +20,7 @@ class RideController extends Controller
             if($userData->is_admin){
                 $destinations = distination::get();
                 $hotels = hotel::get();
-                $drivers = Driver::get();
+                $drivers = User::where('is_driver',1)->get();
                 $rides = ride::with(['hotel','destination','driver'])->get();
 
                     
@@ -36,7 +36,7 @@ class RideController extends Controller
                 $hotelIds = hotel::where('user_id',$userData->id)->pluck('id');
                 $destinations = distination::get();
                 $hotels = hotel::where('user_id',$userData->id)->get();
-                $drivers = Driver::get();
+                $drivers = User::where('is_driver',1)->get();
                 $rides = ride::whereIn('hotel_id',$hotelIds)->with(['hotel','destination','driver'])->get();
                 return view('controller.rides', [
                     'userData'=>$userData,
@@ -56,7 +56,7 @@ class RideController extends Controller
                 $hotelIds = hotel::where('user_id',$request->user_id)->pluck('id');
                 $destinations = distination::get();
                 $hotels = hotel::where('user_id',$request->user_id)->get();
-                $drivers = Driver::get();
+                $drivers = User::where('is_driver',1)->get();
                 $rides = ride::whereIn('hotel_id',$hotelIds)->with(['hotel','destination','driver'])->get();
                 return view('controller.rides', [
                     'userData'=>$userData,

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\hotel;
 use App\Models\Driver;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -29,6 +30,6 @@ class ride extends Model
         return $this->belongsTo(distination::class,'destination_id');
     }
     public function driver(){
-        return $this->belongsTo(Driver::class,'driver_id');
+        return $this->belongsTo(User::class,'driver_id');
     }
 }

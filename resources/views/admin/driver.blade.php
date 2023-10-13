@@ -53,6 +53,7 @@
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$driver->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$driver->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
+                                                    <input type="hidden" id="driverdata{{$driver->id}}" data-id="{{$driver->id}}" data-name="{{$driver->name}}" data-username="{{$driver->username}}" data-email="{{$driver->email}}" data-password="{{$driver->password}}">
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -116,27 +117,36 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-modalLabel">Update hotel</h4>
+                            <h4 class="modal-title" id="add-modalLabel">Update Driver</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="/permision" method="POST">
-                        <div class="modal-body">
-
-
-                                <div class="mb-3">
-                                    @csrf
-                                    <label for="username" class="form-label">hotel Name</label>
-                                    <input type="hidden" name="type" value="update">
-                                    <input type="hidden" id="hotelID" name="hotelID" value="0">
-                                    <input class="form-control" type="text" name="hotelName" id="hotelName" required="" placeholder="hotel Name here">
-                                </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
+                        <form class="ps-3 pe-3" id="editform" method="POST">
+                            <div class="modal-body">
+                                    <div class="mb-3">
+                                        @csrf
+                                        <div class="row mb-2">
+                                            <label for="username" class="form-label">Driver Name</label>
+                                            <input class="form-control" type="text" name="name" id="name_edit" required="" placeholder="Driver Name here">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="username" class="form-label">Driver Username</label>
+                                        <input type="text" placeholder="Driver username here" id="username_edit" class="form-control" name="username">
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" placeholder="Driver email here"  id="email_edit"  class="form-control" name="email">
+                                    </div>
+                                    {{-- <div class="row mb-2">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" placeholder="Driver password here" id="password_edit" class="form-control" name="password">
+                                    </div> --}}
+                            </div>
+                            <input type="hidden" name="driver_id" id="driver_id">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div>
@@ -180,17 +190,14 @@
                             <h4 class="modal-title" id="delete-modalLabel">Delete hotel</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="/permision" method="POST">
+                        <form class="ps-3 pe-3" id="deleteform" method="POST">
                         <div class="modal-body">
 
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">Are you sure, you want to delete this hotel ?</label>
-                                    <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" id="hotelIDDelete" name="hotelID" value="0">
-
-
+                                    <label for="username" class="form-label">Are you sure, you want to delete this driver ?</label>
+                                    <input type="hidden" id="driver_id_delete" name="driver_id" >
                                 </div>
 
                         </div>
@@ -225,17 +232,28 @@
 @endsection
 
 
-{{-- <script>
+<script>
 
 function setDataToModel(id){
-    console.log(id);
-    let hotelName = document.getElementById('name'+id).innerHTML;
-    console.log(hotelName);
-    document.getElementById('hotelName').value = hotelName;
-    document.getElementById('hotelID').value = id;
+    $('#editform').attr('action','/driver/update/'+id  )
+    var driverData = document.getElementById('driverdata' + id);
+    var name = driverData.dataset.name;
+    var username = driverData.dataset.username;
+    var email = driverData.dataset.email;
+    // var password = driverData.dataset.password;
+    
+    document.getElementById('driver_id').value = id;
+    document.getElementById('name_edit').value = name;
+    document.getElementById('username_edit').value = username;
+    document.getElementById('email_edit').value = email;
+    // document.getElementById('password_edit').value = password;
+
+
+
 }
 
 function setDataToModelDelete(id){
-    document.getElementById('hotelIDDelete').value = id;
+    $('#deleteform').attr('action','/driver/delete/'+id);
+    document.getElementById('driver_id_delete').value = id;
 }
-</script> --}}
+</script>

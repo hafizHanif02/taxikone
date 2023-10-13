@@ -25,7 +25,7 @@ class ManagerController extends Controller
             $userData = Auth::user();
 
             if($userData->is_admin){
-                $managers = Manager::get();
+                $managers = User::where('is_controller',1)->get();
                 return view('admin.managers', ['userData'=>$userData,'managers'=>$managers]);
             }
             return "asdfdsf";
@@ -50,21 +50,28 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        Manager::create([
-            'name' => $request->name,
-            'address'=> $request->address,
-        ]);
+       
         User::create([
             'name'=> $request->name,
             'email'=> $request->email,
             'username'=> $request->username,
             'password' => Hash::make($request->password),
-           'is_controller' => 1,
+            'is_controller' => 1,
            'email_verified_at' => now(),
         ]);
-        return redirect()->route('managers.index')->with(['message' => 'Hotel Created']);
+        return redirect()->route('managers.index')->with(['message' => 'Manager Created']);
 
+    }
+
+    public function update(Request $request){
+        User::where('id',$request->id)->update([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'username'=> $request->username,
+            'is_controller' => 1,
+           'email_verified_at' => now(),
+        ]);
+        return redirect()->route('managers.index')->with(['message' => 'Manager Update']);
     }
 
     /**
@@ -89,17 +96,6 @@ class ManagerController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Manager  $manager
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Manager $manager)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -107,9 +103,9 @@ class ManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Manager $manager)
+    public function delete(Request $request)
     {
-        $manager->delete();
+        User::where('id',$request->manager_id)->delete();
         return redirect()->route('managers.index')->with(['message' => 'Manager Deleted']);
 
     }

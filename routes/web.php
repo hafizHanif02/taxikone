@@ -31,7 +31,9 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::get('/rides', [RideController::class, 'showRides'])->name('ride.index');
     Route::post('/rides/store', [RideController::class, 'store'])->name('ride.store');
 
+    
     Route::get('/hotels', [HotelController::class, 'show'])->name('hotels');
+    Route::post('/hotels/update/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
     // Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
     Route::post('/hotels/submit', [HotelController::class, 'store'])->name('hotels.store');
     Route::get('/hotels/delete/{hotelID}', [HotelController::class, 'delete'])->name('hotels.delete');
@@ -40,6 +42,8 @@ Route::group(['middleware' => 'auth.custom'], function () {
     Route::post('/destination',[DistinationController::class, 'addEditDeleteDestination']);
 
     Route::get('/driver',[DriverController::class, 'index'])->name('driver.index');
+    Route::post('/driver/update/{driver}',[DriverController::class, 'update'])->name('driver.update');
+    Route::post('/driver/delete/{driver}',[DriverController::class, 'destroy'])->name('driver.delete');
     Route::post('/driver/store', [DriverController::class, 'store'])->name('drivers.store');
 
 
@@ -51,6 +55,8 @@ Route::group(['middleware' => 'auth.custom'], function () {
 
     Route::get('/managers',[ManagerController::class, 'index'])->name('managers.index');
     Route::post('/managers',[ManagerController::class, 'store'])->name('managers.store');
+    Route::post('/managers/update/{manager}',[ManagerController::class, 'update'])->name('managers.update');
+    Route::post('/managers/delete/{manager}',[ManagerController::class, 'delete'])->name('managers.delete');
 
     Route::get('/commissions',[CommissionController::class, 'index'])->name('commissions.index');
     Route::post('/commissions',[CommissionController::class, 'store'])->name('commissions.store');

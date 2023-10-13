@@ -109,7 +109,7 @@ class PaymentController extends Controller
                     ]);
             }
             elseif($userData->is_controller){
-                    $hotelIds = hotel::where('manager_id', $userData->id)->pluck('id');
+                    $hotelIds = hotel::where('user_id', $userData->id)->pluck('id');
                     $hotelDataAll = ride::whereIn('hotel_id',$hotelIds)->select(
                         DB::raw('hotel_id as hotel_id'),
                         DB::raw('COUNT(*) as number_of_rides'),

@@ -53,7 +53,7 @@ class UserController extends Controller
             $rides = count(ride::get());
             $hotels = count(hotel::get());
             $distinations = count(distination::get());
-            $drivers = count(Driver::get());
+            $drivers = count(User::where('is_driver',1)->get());
             if($userData->is_admin){
                 return view('admin.dashboard', [
                     'userData'=>$userData,
@@ -68,7 +68,7 @@ class UserController extends Controller
             $rides = count(ride::whereIn('hotel_id',$hotelIds)->get());
             $hotels = count(hotel::whereIn('id',$hotelIds)->get());
             $distinations = count(distination::get());
-            $drivers = count(Driver::get());
+            $drivers = count(User::where('is_driver',1)->get());
                 return view('controller.dashboard', [
                     'userData'=>$userData,
                     'rides'=>$rides,

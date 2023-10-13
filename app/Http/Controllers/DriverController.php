@@ -26,7 +26,7 @@ class DriverController extends Controller
             $userData = Auth::user();
 
             if($userData->is_admin){
-                $driver = Driver::get();
+                $driver = User::where('is_driver',1)->get();
                 return view('admin.driver', ['userData'=>$userData,'drivers'=>$driver]);
             }
             return "asdfdsf";
@@ -51,9 +51,6 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        Driver::create([
-            'name' => $request->name,
-        ]);
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -94,9 +91,16 @@ class DriverController extends Controller
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Driver $driver)
+    public function update(Request $request)
     {
-        //
+        User::where(['id'=>$request->driver_id,'is_driver'=>1])->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'username'=> $request->username,
+            'is_driver' => 1,
+        ]);
+        return redirect()->route('driver.index')->with(['message' => 'Driver Edited']);
+
     }
 
     /**
@@ -105,8 +109,10 @@ class DriverController extends Controller
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Driver $driver)
+    public function destroy(Request $request)
     {
-        //
+        User::where(['id'=>$request->driver_id,'is_driver'=>1])->delete();
+        return redirect()->route('driver.index')->with(['message' => 'Driver Deleted']);
+
     }
 }

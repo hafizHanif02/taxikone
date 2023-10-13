@@ -44,7 +44,6 @@
                                                 <th>Destination Address</th>
                                                 <th>Date</th>
                                                 <th>Commission Amount</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
 
@@ -83,11 +82,7 @@
 
                                                 </td>
                                                 
-                                                <td>
-                                                    {{-- <button class="btn btn-success" data-bs-toggle="modal" data-cusomter_name="{{$ride->customer_name}}" onclick="OpenRide({{$ride->id}})" data-bs-target="#open-modal">Open Ride</button>
-                                                    <button class="btn btn-secondary">Close Ride</button>
-                                                    <button class="btn btn-danger">Cancel Ride</button> --}}
-                                                </td>
+                                               
                                             </tr>
                                             @endforeach
                                         </tbody>

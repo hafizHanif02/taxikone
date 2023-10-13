@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\hotel;
-use App\Models\Manager;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\HotelRequest;
@@ -19,7 +18,7 @@ class HotelController extends Controller
 
             if($userData->is_admin){
                 $hotels = hotel::with('manager')->get();
-                $managers = Manager::all(); 
+                $managers = User::where('is_controller',1)->get(); 
                 return view('admin.hotels', [
                     'userData'=>$userData, 
                     'hotels' => $hotels,
@@ -27,13 +26,11 @@ class HotelController extends Controller
                 ]);
             }else if($userData->is_controller){
                 
-            $hotels = hotel::where('manager_id',$userData->id)->with('manager')->get();
-            $manager = Manager::where('id',$userData->id)->first();
-            // dd($manager);
+            $hotels = hotel::where('user_id',$userData->id)->with('manager')->get();
+            $manager = User::where('id',$userData->id)->first();
                 return view('controller.hotels', [
                     'userData'=>$userData, 
                     'hotels' => $hotels,
-                    // 'manager' => $manager,
                 ]);
             }
             
@@ -60,7 +57,6 @@ class HotelController extends Controller
         hotel::create([
             'name' => $request->hotelName,
             'address' => $request->address,
-            'manager_id' => $request->manager_id,
             'user_id' => $request->user_id,
         ]);
         return redirect()->route('hotels')->with(['message' => 'Hotel Created']);
@@ -76,16 +72,21 @@ class HotelController extends Controller
         // dd($request);
         if(Auth::check()){
             $userData = Auth::user();
-            $hotels = hotel::where('manager_id',$userData->id)->with('manager')->get();
-            $manager = Manager::where('id',$request->user_id)->first();
-            // dd($manager);
+            $hotels = hotel::where('user_id',$userData->id)->with('manager')->get();
                 return view('controller.hotels', [
                     'userData'=>$userData, 
                     'hotels' => $hotels,
-                    // 'manager' => $manager,
                 ]);
             
             return "asdfdsf";
         }
+    }
+
+    public function update(Request $request){
+        hotel::where('id',$request->hotelID)->update([
+            'name' => $request->hotelName,
+            'address' => $request->address,
+        ]);
+        return redirect()->route('hotels')->with(['message' => 'Hotel Updated']);
     }
 }

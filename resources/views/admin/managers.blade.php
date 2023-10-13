@@ -54,6 +54,7 @@
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$manager->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$manager->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
                                                 </td>
+                                                <input type="hidden" id="managerdata{{$manager->id}}" data-id="{{$manager->id}}" data-name="{{$manager->name}}" data-username="{{$manager->username}}" data-email="{{$manager->email}}" data-password="{{$manager->password}}">
 
                                             </tr>
                                             @endforeach
@@ -78,7 +79,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-modalLabel">Adding New Hotel</h4>
+                            <h4 class="modal-title" id="add-modalLabel">Adding New Manager</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form class="ps-3 pe-3" action="{{route('managers.store')}}" method="POST">
@@ -90,11 +91,6 @@
                                         <input class="form-control" type="text" name="name" required="" placeholder="Manager Name here">
                                     </div>
                                 </div>
-                                <div class="row mb-2">
-                                    <label for="address" class="form-label">Address</label>
-                                    <input type="text" placeholder="Manager address here" class="form-control" name="address">
-                                </div>
-
                                 <div class="row mb-2">
                                     <label for="username" class="form-label">Manager Username</label>
                                     <input type="text" name="username" placeholder="Manager Username for Login" class="form-control" name="username">
@@ -126,27 +122,41 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-modalLabel">Update hotel</h4>
+                            <h4 class="modal-title" id="add-modalLabel">Update Manager</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" action="/permision" method="POST">
-                        <div class="modal-body">
-
-
-                                <div class="mb-3">
-                                    @csrf
-                                    <label for="username" class="form-label">hotel Name</label>
-                                    <input type="hidden" name="type" value="update">
-                                    <input type="hidden" id="hotelID" name="hotelID" value="0">
-                                    <input class="form-control" type="text" name="hotelName" id="hotelName" required="" placeholder="hotel Name here">
-                                </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
+                        <form class="ps-3 pe-3" id="editform" method="POST">
+                            <div class="modal-body">
+                                    <div class="mb-3">
+                                        @csrf
+                                        <input type="hidden" id="manager_id" name="id">
+                                        <div class="row mb-2">
+                                            <label for="name" class="form-label">Name</label>
+                                            <input class="form-control" type="text" id="name_edit" name="name" required="" placeholder="Manager Name here">
+                                        </div>
+                                    </div>
+    
+                                    <div class="row mb-2">
+                                        <label for="username" class="form-label">Manager Username</label>
+                                        <input type="text" name="username" placeholder="Manager Username for Login" id="username_edit" class="form-control" name="username">
+                                    </div>
+    
+                                    <div class="row mb-2">
+                                        <label for="email" class="form-label">Manager Email</label>
+                                        <input type="mail" name="email" placeholder="Manager Email here" id="email_edit" class="form-control" name="username">
+                                    </div>
+    
+                                    {{-- <div class="row mb-2">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" placeholder="Manager Password here" id="password_edit" class="form-control" name="password">
+                                    </div> --}}
+    
+                            </div>
+                            <div class="modal-footer">
+                                {{-- <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button> --}}
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
@@ -158,14 +168,14 @@
                             <h4 class="modal-title" id="delete-modalLabel">Delete Manager</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="ps-3 pe-3" id="delete-form" action="" method="POST">
+                        <form class="ps-3 pe-3" id="delete-form"  method="POST">
                         <div class="modal-body">
 
 
                                 <div class="mb-3">
                                     @csrf
                                     <label for="username" class="form-label">Are you sure, you want to delete this hotel ?</label>
-                                    <input type="hidden" id="manager_id" name="manager_id" >
+                                    <input type="hidden" id="manager_id_delete" name="manager_id" >
 
 
                                 </div>
@@ -205,14 +215,25 @@
 <script>
 
 function setDataToModel(id){
-    console.log(id);
-    let hotelName = document.getElementById('name'+id).innerHTML;
-    console.log(hotelName);
-    document.getElementById('hotelName').value = hotelName;
+    $('#editform').attr('action','/managers/update/'+id  )
+    var managerData = document.getElementById('managerdata' + id);
+    var name = managerData.dataset.name;
+    var username = managerData.dataset.username;
+    var email = managerData.dataset.email;
+    // var password = managerData.dataset.password;
+    
     document.getElementById('manager_id').value = id;
+    document.getElementById('name_edit').value = name;
+    document.getElementById('username_edit').value = username;
+    document.getElementById('email_edit').value = email;
+    // document.getElementById('password_edit').value = password;
+
+
+
 }
 
 function setDataToModelDelete(id){
-    document.getElementById('hotelIDDelete').value = id;
+    $('#delete-form').attr('action','/managers/delete/'+id);
+    document.getElementById('manager_id_delete').value = id;
 }
 </script>
