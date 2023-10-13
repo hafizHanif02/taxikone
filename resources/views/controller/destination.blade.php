@@ -1,6 +1,6 @@
 @extends('controller.layout') <!-- Extend the layout file -->
 
-@section('title', 'Destination List') <!-- Define the title -->
+@section('title', 'List Destination') <!-- Define the title -->
 
 @section('content') <!-- Fill in the content section -->
 

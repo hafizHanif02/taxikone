@@ -1,6 +1,6 @@
 @extends('controller.layout') <!-- Extend the layout file -->
 
-@section('title', 'Hotel List') <!-- Define the title -->
+@section('title', 'List Hotel') <!-- Define the title -->
 
 @section('content') <!-- Fill in the content section -->
 
@@ -50,7 +50,7 @@
                                     <tbody>
                                         @foreach ($hotels as $htl)
                                             <tr>
-                                                <td>{{ $htl->id }}</td>
+                                                <td id="hotelID"{{ $htl->id }}>{{ $htl->id }}</td>
                                                 <td id="name{{ $htl->id }}">{{ $htl->name }}</td>
                                                 <td
                                                 @if($htl->manager)
@@ -58,15 +58,10 @@
                                                 @endif
                                             </td>
                                                 <td id="address{{ $htl->id }}">{{ $htl->address }}</td>
-                                                <td class="txt-center">
-                                                    <button class="btn btn-warning" data-bs-toggle="modal"
-                                                        data-bs-target="#edit-modal"
-                                                        onclick="setDataToModel({{ $htl->id }})" title="Edit"><i
+                                                <input type="hidden" id="hoteldata" data-hotel_name="{{$htl->name}}" data-hotel_address="{{$htl->address}}" data-hotel_manager_id="{{$htl->manager->id}}" data-hotel_manager_name="{{$htl->manager->name}}">
+                                                <td>
+                                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{ $htl->id }})" title="Edit"><i
                                                             class="ri-edit-2-line"></i></button>
-                                                    {{-- <button class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-modal"
-                                                        onclick="setDataToModelDelete({{ $htl->id }})"
-                                                        title="Delete"><i class="ri-delete-bin-line"></i></button> --}}
                                                     <a href="{{route('hotels.delete',$htl->id)}}"><button class="btn btn-danger"><i class="ri-delete-bin-line"></i></button></a>                                                
                                                 </td>
                                             </tr>
@@ -133,9 +128,7 @@
             </div><!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-        {{-- Models end here --}}
-
-        {{-- <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel"
+        <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -143,18 +136,34 @@
                         <h4 class="modal-title" id="add-modalLabel">Update hotel</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form class="ps-3 pe-3" action="/permision" method="POST">
+                    <form class="ps-3 pe-3" id="updateform"  method="POST">
+                        @csrf
                         <div class="modal-body">
-
-
                             <div class="mb-3">
                                 @csrf
-                                <label for="username" class="form-label">hotel Name</label>
-                                <input type="hidden" name="type" value="update">
-                                <input type="hidden" id="hotelID" name="hotelID" value="0">
-                                <input class="form-control" type="text" name="hotelName" id="hotelName"
-                                    required="" placeholder="hotel Name here">
+                                <div class="row mb-2">
+                                    <label for="username" class="form-label">Hotel Name</label>
+                                    <input type="hidden" name="type" value="new">
+
+
+                                    <input type="hidden" name="hotelID" id="hotel_id_edit">
+                                    <input class="form-control" type="text" id="hotel_name_edit" id="hotelName" name="hotelName" required=""
+                                        placeholder="hotel Name here">
+                                </div>
                             </div>
+                            <div class="row mb-2">
+                                <label for="username" class="form-label">Hotel Address</label>
+                                <input type="text" placeholder="hotel address here" id="hotel_address_edit" class="form-control" name="address">
+                            </div>
+
+                            <div class="row mb-2">
+                                <label for="username" class="form-label">Hotel Manager</label>
+                                <label for="username" class="form-label">Hotel Manager</label>
+                                <input type="text" class="form-control" disabled  value="{{$userData->name }}">
+                                <input type="hidden" class="form-control"  name="manager_id" id="manager_id" value="{{$userData->id }}">
+                                <input type="hidden" class="form-control"  name="user_id" id="user_id" value="{{$userData->id}}">
+                            </div>
+                            
 
                         </div>
                         <div class="modal-footer">
@@ -164,9 +173,9 @@
                     </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal --> --}}
+        </div><!-- /.modal -->
 
-        {{-- <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel"
+        <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="delete-modalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -183,7 +192,7 @@
                                 <label for="username" class="form-label">Are you sure, you want to delete this hotel
                                     ?</label>
                                 <input type="hidden" name="type" value="delete">
-                                <input type="hidden" id="hotelIDDelete" name="hotelID" value="0">
+                                <input type="hidden" id="hotelIDDelete" name="hotelID" id="hotelID">
 
 
                             </div>
@@ -196,7 +205,7 @@
                     </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal --> --}}
+        </div><!-- /.modal -->
         {{-- Models end here --}}
         <!-- Footer Start -->
         <footer class="footer">
@@ -224,11 +233,12 @@
 
 <script>
     function setDataToModel(id) {
-        console.log(id);
         let hotelName = document.getElementById('name' + id).innerHTML;
-        console.log(hotelName);
-        document.getElementById('hotelName').value = hotelName;
-        document.getElementById('hotelID').value = id;
+        let hoteladdress = document.getElementById('address' + id).innerHTML;
+        $('#updateform').attr('action','/hotels/update/'+id);
+        document.getElementById('hotel_name_edit').value = hotelName;
+        document.getElementById('hotel_address_edit').value = hoteladdress;
+        document.getElementById('hotel_id_edit').value = id;
     }
 
     function setDataToModelDelete(id) {

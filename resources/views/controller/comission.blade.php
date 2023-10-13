@@ -58,7 +58,7 @@
                                                 <td id="name{{$commission->id}}">{{$commission->hotel->name}}</td>
                                                 <td id="address{{$commission->id}}">{{$commission->destination->name}}</td>
                                                 <td id="destination_address{{$commission->id}}">{{$commission->destination->address}}</td>
-                                                <td id="commission{{$commission->id}}">{{$commission->comission_rate}}</td>
+                                                <td id="commission{{$commission->id}}">{{ number_format($commission->comission_rate, 2) }}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$commission->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$commission->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>

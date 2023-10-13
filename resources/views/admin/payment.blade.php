@@ -70,7 +70,7 @@
                                                             <td>{{$driverData->driver->name}}</td>
                                                             <td>{{$driverData->number_of_rides}}</td>
                                                             
-                                                            <td>{{$driverData->balance_comission}}</td>
+                                                            <td>{{ number_format($driverData->balance_comission, 2) }}</td>
                                                             <td>
                                                                 @if ($driverData->balance_comission != 0)
                                                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick="addpayment({{$driverData->driver->id}})">PAY</button>
@@ -138,11 +138,11 @@
                                                             <td>{{$loop->iteration }}</td>
                                                             <td>{{$hotelData->hotel->name}}</td>
                                                             <td>{{$hotelData->pay_ride}}</td>
-                                                            <td>{{$hotelData->pay_amount}}</td>
+                                                            <td>{{ number_format($hotelData->pay_amount, 2) }}</td>
                                                             <td>{{$hotelData->payable_ride}}</td>
-                                                            <td>{{$hotelData->payable_amount}}</td>
+                                                            <td>{{ number_format($hotelData->payable_amount, 2) }}</td>
                                                             <td>
-                                                                @if ($hotelData->hotel_paid == 0)
+                                                                @if ($hotelData->payable_amount != 0)
                                                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalhotel"  onclick="addpaymenthotel({{$hotelData->hotel->id}})">PAY</button>
                                                                 @else
                                                                 <button class="btn btn-success" disabled>PAID</button>
