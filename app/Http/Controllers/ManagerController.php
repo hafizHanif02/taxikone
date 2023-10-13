@@ -25,7 +25,7 @@ class ManagerController extends Controller
             $userData = Auth::user();
 
             if($userData->is_admin){
-                $managers = User::where('is_controller',1)->get();
+                $managers = user::where('is_controller',1)->get();
                 return view('admin.managers', ['userData'=>$userData,'managers'=>$managers]);
             }
             return "asdfdsf";
@@ -57,7 +57,7 @@ class ManagerController extends Controller
         'password' => 'required',
     ]);
 
-    User::create([
+    user::create([
         'name' => $request->name,
         'email' => $request->email,
         'username' => $request->username,
@@ -70,7 +70,7 @@ class ManagerController extends Controller
 }
 
     public function update(Request $request){
-        User::where('id',$request->id)->update([
+        user::where('id',$request->id)->update([
             'name'=> $request->name,
             'email'=> $request->email,
             'username'=> $request->username,
@@ -111,7 +111,7 @@ class ManagerController extends Controller
      */
     public function delete(Request $request)
     {
-        User::where('id',$request->manager_id)->delete();
+        user::where('id',$request->manager_id)->delete();
         return redirect()->route('managers.index')->with(['message' => 'Manager Deleted']);
 
     }
