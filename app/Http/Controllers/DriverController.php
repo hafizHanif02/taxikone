@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use Illuminate\Http\Request;
 // use Illuminate\Foundation\Auth\User;
-use App\Models\user;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Migrations\Migration;
@@ -56,7 +56,7 @@ class DriverController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'username' => 'required|unique:users', 
-            'password' => 'required',
+            'password' => 'required|min:6',
         ]);
     
         User::create([
