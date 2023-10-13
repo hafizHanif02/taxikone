@@ -174,7 +174,7 @@
 
                                 <div class="mb-3">
                                     @csrf
-                                    <label for="username" class="form-label">Are you sure, you want to delete this hotel ?</label>
+                                    <label for="username" class="form-label">Are you sure, you want to delete this manager ?</label>
                                     <input type="hidden" id="manager_id_delete" name="manager_id" >
 
 

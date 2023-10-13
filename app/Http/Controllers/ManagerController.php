@@ -49,19 +49,25 @@ class ManagerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-       
-        User::create([
-            'name'=> $request->name,
-            'email'=> $request->email,
-            'username'=> $request->username,
-            'password' => Hash::make($request->password),
-            'is_controller' => 1,
-           'email_verified_at' => now(),
-        ]);
-        return redirect()->route('managers.index')->with(['message' => 'Manager Created']);
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'username' => 'required|unique:users', 
+        'password' => 'required',
+    ]);
 
-    }
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'username' => $request->username,
+        'password' => Hash::make($request->password),
+        'is_controller' => 1,
+        'email_verified_at' => now(),
+    ]);
+
+    return redirect()->route('managers.index')->with(['message' => 'Manager Created']);
+}
 
     public function update(Request $request){
         User::where('id',$request->id)->update([

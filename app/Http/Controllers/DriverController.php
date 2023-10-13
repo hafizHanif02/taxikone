@@ -52,12 +52,19 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'username' => 'required|unique:users', 
+            'password' => 'required',
+        ]);
+    
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'username'=> $request->username,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
-            'is_driver' => 1,
+            'is_controller' => 1,
             'email_verified_at' => now(),
         ]);
         return redirect()->route('driver.index')->with(['message' => 'Driver Created']);
