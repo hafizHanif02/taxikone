@@ -64,7 +64,7 @@ class DriverController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'is_controller' => 1,
+            'is_driver' => 1,
             'email_verified_at' => now(),
         ]);
         return redirect()->route('driver.index')->with(['message' => 'Driver Created']);
