@@ -38,7 +38,7 @@
                                         class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr class="text-center">
-                                                <th>ID</th>
+                                                <th>*</th>
                                                 <th>Manager</th>
                                                 <th>Action</th>
                                             </tr>
@@ -48,7 +48,7 @@
                                         <tbody>
                                             @foreach ($managers as $manager)
                                             <tr class="text-center">
-                                                <td>{{$manager->id}}</td>
+                                                <td>{{$loop->count}}</td>
                                                 <td id="name{{$manager->id}}">{{$manager->name}}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$manager->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
@@ -135,22 +135,22 @@
                                             <input class="form-control" type="text" id="name_edit" name="name" required="" placeholder="Manager Name here">
                                         </div>
                                     </div>
-    
+
                                     <div class="row mb-2">
                                         <label for="username" class="form-label">Manager Username</label>
                                         <input type="text" name="username" placeholder="Manager Username for Login" id="username_edit" class="form-control" name="username">
                                     </div>
-    
+
                                     <div class="row mb-2">
                                         <label for="email" class="form-label">Manager Email</label>
                                         <input type="mail" name="email" placeholder="Manager Email here" id="email_edit" class="form-control" name="username">
                                     </div>
-    
+
                                     {{-- <div class="row mb-2">
                                         <label for="password" class="form-label">Password</label>
                                         <input type="password" placeholder="Manager Password here" id="password_edit" class="form-control" name="password">
                                     </div> --}}
-    
+
                             </div>
                             <div class="modal-footer">
                                 {{-- <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button> --}}
@@ -221,7 +221,7 @@ function setDataToModel(id){
     var username = managerData.dataset.username;
     var email = managerData.dataset.email;
     // var password = managerData.dataset.password;
-    
+
     document.getElementById('manager_id').value = id;
     document.getElementById('name_edit').value = name;
     document.getElementById('username_edit').value = username;

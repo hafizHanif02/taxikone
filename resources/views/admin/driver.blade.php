@@ -48,7 +48,7 @@
                                         <tbody>
                                             @foreach ($drivers as $driver)
                                             <tr class="text-center">
-                                                <td>{{$driver->id}}</td>
+                                                <td>{{$loop->count}}</td>
                                                 <td id="userID{{$driver->id}}">{{$driver->name}}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$driver->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
@@ -87,21 +87,14 @@
                                     @csrf
                                     <div class="row mb-2">
                                         <label for="username" class="form-label">Driver Name</label>
-                                        <input class="form-control" type="text" name="name" required="" placeholder="Driver Name here">
+                                        <input class="form-control" type="text" name="name" required placeholder="Driver Name here">
                                     </div>
                                 </div>
                                 <div class="row mb-2">
-                                    <label for="username" class="form-label">Driver Username</label>
-                                    <input type="text" placeholder="Driver username here" class="form-control" name="username">
-                                </div>
-                                <div class="row mb-2">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" placeholder="Driver email here" class="form-control" name="email">
+                                    <input type="email" placeholder="Driver email here" class="form-control" name="email" required>
                                 </div>
-                                <div class="row mb-2">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" placeholder="Driver password here" class="form-control" name="password">
-                                </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Save changes</button>
@@ -150,8 +143,8 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div>
-            
-            
+
+
             <!-- /.modal -->
 
             <div id="ride-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="add-modalLabel" aria-hidden="true">
@@ -167,9 +160,9 @@
 
                                 <div class="mb-3">
                                     @csrf
-                                    
-                                    
-                                    
+
+
+
                                     <input class="form-control" type="text" name="hotelName" id="hotelName" required="" placeholder="hotel Name here">
                                 </div>
 
@@ -241,7 +234,7 @@ function setDataToModel(id){
     var username = driverData.dataset.username;
     var email = driverData.dataset.email;
     // var password = driverData.dataset.password;
-    
+
     document.getElementById('driver_id').value = id;
     document.getElementById('name_edit').value = name;
     document.getElementById('username_edit').value = username;

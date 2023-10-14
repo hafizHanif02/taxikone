@@ -44,7 +44,7 @@
     </head>
 
     <body>
-        @include('admin.toast')
+        {{-- @include('admin.toast') --}}
         <!-- Begin page -->
         <div class="wrapper">
 
@@ -57,7 +57,7 @@
                         <!-- Topbar Brand Logo -->
                         <div class="logo-topbar">
                             <!-- Logo light -->
-                            <a href="index.html" >
+                            <a href="/" >
                                 <span >
                                     <img src="/assets/images/logo.png" alt="logo"><span style="
                                     font-size: 20px;
@@ -310,7 +310,7 @@
                             <a href="/managers" class="side-nav-link">
                                 <i class="ri-user-line"></i>
                                 <span class="badge bg-success float-end"></span>
-                                <span>Hotel Manager</span>
+                                <span>Group Manager</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
@@ -617,5 +617,31 @@
             }
         </script>
 
+        @if(Session::has('message'))
+                    <div class="toastr-notice" id="new_toast" style="position: absolute;top: 10px;z-index: 9999;right: -510px;opacity:0;">
+                        <div class="toast"  style="display:block;">
+                            <div class="toast-header">
+                                Alert
+                            </div>
+                            <div class="toast-body">
+                                {{ Session::get('message') }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        $(document).ready(function(){
+                            $("#new_toast").animate({
+                                right: '100px',
+                                opacity: 1,
+                            }, 1000);
+
+                            $("#new_toast").delay(3000).animate({
+                                right: '-500px',
+                                opacity: 0,
+                            }, 1000);
+                        });
+                    </script>
+                    @endif
     </body>
 </html>

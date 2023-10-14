@@ -37,7 +37,7 @@
                                         class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr class="text-center">
-                                                <th>Customer Name</th>
+
                                                 <th>Driver</th>
                                                 <th>Hotel</th>
                                                 <th>Destination</th>
@@ -51,10 +51,7 @@
                                         <tbody>
                                             @foreach($rides as $ride)
                                             <tr class="text-center">
-                                                <td>
-                                                    {{$ride->customer_name}}
-                                                <input required type="hidden" class="customer_name{{$ride->id}}" value="{{$ride->customer_name}}">
-                                                </td>
+                                                
                                                 <td>
                                                     {{$ride->driver->name}}
                                                     <input required type="hidden" class="hotel_name{{$ride->id}}" value="{{$ride->driver->name}}">
@@ -81,8 +78,8 @@
                                                     <input required type="hidden" class="ride_commission_amount{{$ride->id}}" value="{{$ride->comission_rate}}">
 
                                                 </td>
-                                                
-                                               
+
+
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -116,10 +113,7 @@
                     <div class="modal-body">
                         @csrf
                             <div class="mb-3">
-                                <div class="row mb-2">
-                                    <label for="customer_name" class="form-label">Customer Name</label>
-                                    <input  class="form-control" type="text" name="customer_name"  placeholder="Customer Name here">
-                                </div>
+
                             </div>
                             <div class="mb-3">
                                 <div class="row mb-2">
@@ -188,10 +182,7 @@
                                 @csrf
 
                                 <table class="table table-bordered">
-                                    <tr>
-                                        <th>Customer Name</th>
-                                        <td><span class="open_ride_customer_name"></span></td>
-                                    </tr>
+
                                     <tr>
                                         <th>Guest Of (Hotel)</th>
                                         <td><span class="open_ride_hotel_name"></span></td>
@@ -249,7 +240,7 @@
                             </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-dark">Save</button>
-                                    </div> 
+                                    </div>
                              </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -304,7 +295,7 @@
                 $('#hotel_id, #destination_id').change(function() {
                     var hotelId = $('#hotel_id').val();
                     var destinationId = $('#destination_id').val();
-        
+
                     if (hotelId && destinationId) {
                         $.get('/get-commission-rate', { hotel_id: hotelId, destination_id: destinationId }, function(data) {
                             if (data.commission_rate) {

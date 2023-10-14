@@ -40,7 +40,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Destination</th>
-                                                <th>Address</th>
+
                                                 <th>Action</th>
 
                                             </tr>
@@ -54,7 +54,7 @@
                                             <tr>
                                                 <td>{{$dst->id}}</td>
                                                 <td id="name{{$dst->id}}">{{$dst->name}}</td>
-                                                <td id="address{{$dst->id}}">{{$dst->address}}</td>
+
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$dst->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$dst->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
@@ -97,9 +97,7 @@
                                     <input type="hidden" name="destID" value="0">
                                     <label for="username" class="form-label">Destination Name</label>
                                     <input class="form-control" type="text" name="destinationName" required="" placeholder="Name here">
-                                    <br>
-                                    <label for="username" class="form-label">Destination Address</label>
-                                    <input class="form-control" type="text" name="destinationAddress" required="" placeholder="Address here">
+
                                 </div>
 
                         </div>
@@ -130,9 +128,7 @@
                                     <input type="hidden" name="destID" value="0" id="destID">
                                     <label for="username" class="form-label">Destination Name</label>
                                     <input class="form-control" type="text" id="destinationName" name="destinationName" required="" placeholder="Name here">
-                                    <br>
-                                    <label for="username" class="form-label">Destination Address</label>
-                                    <input class="form-control" type="text" id="destinationAddress" name="destinationAddress" required="" placeholder="Address here">
+
                                 </div>
 
                         </div>
@@ -202,10 +198,10 @@
 function setDataToModel(id){
     console.log(id);
     let destName = document.getElementById('name'+id).innerHTML;
-    let destAddress = document.getElementById('address'+id).innerHTML;
+    
 
     document.getElementById('destinationName').value = destName;
-    document.getElementById('destinationAddress').value = destAddress;
+    // document.getElementById('destinationAddress').value = destAddress;
     document.getElementById('destID').value = id;
 }
 

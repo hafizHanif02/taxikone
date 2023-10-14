@@ -12,6 +12,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 
 
 class DriverController extends Controller
@@ -28,6 +29,8 @@ class DriverController extends Controller
 
             if($userData->is_admin){
                 $driver = User::where('is_driver',1)->get();
+
+
                 return view('admin.driver', ['userData'=>$userData,'drivers'=>$driver]);
             }
             return "asdfdsf";
@@ -52,18 +55,26 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'username' => 'required|unique:users', 
-            'password' => 'required|min:6',
-        ]);
-    
+        // $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email|unique:email',
+        // ]);
+
+        $isAva = User::where('email', $request->email)->get();
+        if(count($isAva)>0){
+            return redirect()->route('driver.index')->with(['message' => 'Email is already registred']);
+        }
+
+        $isAva = User::where('username', $request->email)->get();
+        if(count($isAva)>0){
+            return redirect()->route('driver.index')->with(['message' => 'Email is already registred']);
+        }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
+            'username' => $request->email,
+            'password' => Hash::make('123456789'),
             'is_driver' => 1,
             'email_verified_at' => now(),
         ]);
