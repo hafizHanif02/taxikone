@@ -41,7 +41,6 @@
                                                 <th>Driver</th>
                                                 <th>Hotel</th>
                                                 <th>Destination</th>
-                                                <th>Destination Address</th>
                                                 <th>Date</th>
                                                 <th>Commission Amount</th>
                                             </tr>
@@ -51,7 +50,7 @@
                                         <tbody>
                                             @foreach($rides as $ride)
                                             <tr class="text-center">
-                                                
+
                                                 <td>
                                                     {{$ride->driver->name}}
                                                     <input required type="hidden" class="hotel_name{{$ride->id}}" value="{{$ride->driver->name}}">
@@ -64,17 +63,14 @@
                                                     {{$ride->destination->name}}
                                                     <input required type="hidden" class="destination_name{{$ride->id}}" value="{{$ride->destination->name}}">
                                                 </td>
-                                                <td>
-                                                    {{$ride->destination->address}}
-                                                    <input required type="hidden" class="destination_address{{$ride->id}}" value="{{$ride->destination->address}}">
-                                                </td>
+
                                                 <td>
                                                     {{$ride->ride_date}}
                                                     <input required type="hidden" class="ride_date{{$ride->id}}" value="{{$ride->ride_date}}">
 
                                                 </td>
                                                 <td>
-                                                    {{$ride->comission_rate}}
+                                                    {{number_format($ride->comission_rate, 2, '.')}} Euro
                                                     <input required type="hidden" class="ride_commission_amount{{$ride->id}}" value="{{$ride->comission_rate}}">
 
                                                 </td>
