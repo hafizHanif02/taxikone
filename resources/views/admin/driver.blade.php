@@ -37,8 +37,8 @@
                                     <table id="datatable-buttons"
                                         class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
-                                            <tr class="text-center">
-                                                <th>ID</th>
+                                            <tr>
+                                                <th class="text-start">ID</th>
                                                 <th>Driver</th>
                                                 <th>Action</th>
                                             </tr>
@@ -47,8 +47,8 @@
 
                                         <tbody>
                                             @foreach ($drivers as $driver)
-                                            <tr class="text-center">
-                                                <td>{{$loop->count}}</td>
+                                            <tr class="">
+                                                <td class="text-start">{{$loop->count}}</td>
                                                 <td id="userID{{$driver->id}}">{{$driver->name}}</td>
                                                 <td class="txt-center">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$driver->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
