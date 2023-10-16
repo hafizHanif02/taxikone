@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="card-body">
                                     <table id="datatable-buttons"
-                                        class="table table-striped dt-responsive nowrap w-100">
+                                        class="table table-striped nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th class="text-start">ID</th>
