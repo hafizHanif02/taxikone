@@ -48,7 +48,7 @@
                                         <tbody>
                                             @foreach ($drivers as $driver)
                                             <tr class="">
-                                                <td class="text-start">{{$loop->count}}</td>
+                                                <td class="text-start">{{ $loop->iteration}}</td>
                                                 <td id="userID{{$driver->id}}">{{$driver->name}}</td>
                                                 <td class="text-end">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$driver->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
