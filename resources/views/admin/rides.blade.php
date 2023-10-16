@@ -70,7 +70,7 @@
 
                                                 </td>
                                                 <td>
-                                                    {{number_format($ride->comission_rate, 2, '.')}} Euro
+                                                    {{number_format($ride->comission_rate, 2, '.', '')}} Euro
                                                     <input required type="hidden" class="ride_commission_amount{{$ride->id}}" value="{{$ride->comission_rate}}">
 
                                                 </td>
