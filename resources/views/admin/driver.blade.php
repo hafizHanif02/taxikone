@@ -90,10 +90,7 @@
                                         <input class="form-control" type="text" name="name" required placeholder="Driver Name here">
                                     </div>
                                 </div>
-                                <div class="row mb-2">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" placeholder="Driver email here" class="form-control" name="email" required>
-                                </div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -122,18 +119,7 @@
                                             <input class="form-control" type="text" name="name" id="name_edit" required="" placeholder="Driver Name here">
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
-                                        <label for="username" class="form-label">Driver Username</label>
-                                        <input type="text" placeholder="Driver username here" id="username_edit" class="form-control" name="username">
-                                    </div>
-                                    <div class="row mb-2">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" placeholder="Driver email here"  id="email_edit"  class="form-control" name="email">
-                                    </div>
-                                    {{-- <div class="row mb-2">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" placeholder="Driver password here" id="password_edit" class="form-control" name="password">
-                                    </div> --}}
+
                             </div>
                             <input type="hidden" name="driver_id" id="driver_id">
                             <div class="modal-footer">
@@ -237,8 +223,8 @@ function setDataToModel(id){
 
     document.getElementById('driver_id').value = id;
     document.getElementById('name_edit').value = name;
-    document.getElementById('username_edit').value = username;
-    document.getElementById('email_edit').value = email;
+    // document.getElementById('username_edit').value = username;
+    // document.getElementById('email_edit').value = email;
     // document.getElementById('password_edit').value = password;
 
 
