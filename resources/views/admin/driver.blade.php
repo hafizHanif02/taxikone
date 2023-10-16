@@ -34,8 +34,8 @@
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
                                 <div class="card-body">
-                                    <table id="datatable-buttons"
-                                        class="table table-striped nowrap w-100">
+                                    <table id=""
+                                        class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th class="text-start">ID</th>
