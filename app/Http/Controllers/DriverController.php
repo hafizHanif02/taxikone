@@ -72,8 +72,8 @@ class DriverController extends Controller
 
         User::create([
             'name' => $request->name,
-            'email' => $request->email,
-            'username' => $request->email,
+            'email' => $request->name . rand(100,99999),
+            'username' => $request->name . rand(100,99999),
             'password' => Hash::make('123456789'),
             'is_driver' => 1,
             'email_verified_at' => now(),
@@ -114,8 +114,6 @@ class DriverController extends Controller
     {
         User::where(['id'=>$request->driver_id,'is_driver'=>1])->update([
             'name' => $request->name,
-            'email' => $request->email,
-            'username'=> $request->username,
             'is_driver' => 1,
         ]);
         return redirect()->route('driver.index')->with(['message' => 'Driver Edited']);
