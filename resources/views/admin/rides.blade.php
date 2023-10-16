@@ -32,7 +32,9 @@
                                 <div class="card-header text-end">
                                    <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#add-modal">Add Ride</button>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="
+                                overflow: scroll;
+                            ">
                                     <table id="datatable-buttons"
                                         class="table table-striped dt-responsive nowrap w-100">
                                         <thead>
