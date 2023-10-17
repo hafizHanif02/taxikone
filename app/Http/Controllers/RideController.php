@@ -23,13 +23,22 @@ class RideController extends Controller
                 $drivers = User::where('is_driver',1)->get();
                 $rides = ride::with(['hotel','destination','driver'])->get();
 
-                    
+                $topDriver = ride::groupBy('driver_id')->selectRaw('count(driver_id) as count, driver_id')->orderby('count', 'desc')->first();
+
+                $topDist = ride::groupBy('destination_id')->selectRaw('count(destination_id) as count, destination_id')->orderby('count', 'desc')->first();
+                $topHotel = ride::groupBy('hotel_id')->selectRaw('count(hotel_id) as count, hotel_id')->orderby('count', 'desc')->first();
+
+                //ModelName::groupBy('group_id')->selectRaw('count(*) as total, group_id')->get();
+
                 return view('admin.rides', [
                     'userData'=>$userData,
                      'destinations'=> $destinations,
                      'hotels' => $hotels,
                      'rides' => $rides,
                      'drivers'=> $drivers,
+                     'topDriver'=> $topDriver,
+                     'topDist' => $topDist,
+                     'topHotel' => $topHotel
                     ]);
             }
             elseif($userData->is_controller){

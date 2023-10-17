@@ -119,7 +119,7 @@
                                     <select required class="form-control" name="driver_id" id="driver_id">
                                         <option value="" selected disabled >What is your Driver</option>
                                         @foreach($drivers as $driver)
-                                        <option value="{{$driver->id}}">{{$driver->name}}</option>
+                                        <option @if($topDriver->driver_id == $driver->id) selected @endif value="{{$driver->id}}">{{$driver->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -129,7 +129,7 @@
                                 <select required class="form-control" name="hotel_id" id="hotel_id">
                                     <option value="" selected disabled >What is your Hotel</option>
                                     @foreach($hotels as $hotel)
-                                    <option value="{{$hotel->id}}">{{$hotel->name}}</option>
+                                    <option @if($topHotel->hotel_id == $hotel->id) selected @endif value="{{$hotel->id}}">{{$hotel->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -138,7 +138,7 @@
                                 <select required class="form-control" name="destination_id" id="destination_id">
                                     <option value="" selected disabled >What is your Destination</option>
                                     @foreach($destinations as $destination)
-                                    <option value="{{$destination->id}}">{{$destination->name}}</option>
+                                    <option @if($topDist->destination_id == $destination->id) selected @endif value="{{$destination->id}}">{{$destination->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -156,7 +156,7 @@
                             </div> --}}
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button id=btnSave type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
                 </div><!-- /.modal-content -->
@@ -237,7 +237,7 @@
                                 </div>
                             </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-dark">Save</button>
+                                        <button  type="submit" class="btn btn-dark">Save</button>
                                     </div>
                              </form>
                 </div><!-- /.modal-content -->
@@ -290,22 +290,30 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
+                getComissionRate();
                 $('#hotel_id, #destination_id').change(function() {
-                    var hotelId = $('#hotel_id').val();
+                    getComissionRate();
+                });
+            });
+
+            function getComissionRate(){
+                //console.log('get comission');
+                var hotelId = $('#hotel_id').val();
                     var destinationId = $('#destination_id').val();
 
                     if (hotelId && destinationId) {
                         $.get('/get-commission-rate', { hotel_id: hotelId, destination_id: destinationId }, function(data) {
                             if (data.commission_rate) {
                                 $('#commission_amount').val(data.commission_rate);
+                                document.getElementById('btnSave').disabled = false;
                             } else {
                                 $('#commission_amount').val('Commission rate not found');
+                                document.getElementById('btnSave').disabled = true;
                             }
                         });
                     } else {
                         $('#commission_amount').val('');
                     }
-                });
-            });
+            }
         </script>
 @endsection
