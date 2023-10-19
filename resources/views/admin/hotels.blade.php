@@ -41,7 +41,7 @@
                                             <th>ID</th>
                                             <th>Hote Name</th>
                                             <th>Group Manager</th>
-                                            <th>Address</th>
+
                                             <th>Rides</th>
                                             <th>Action</th>
                                         </tr>
@@ -58,10 +58,10 @@
                                                  id="userID{{ $htl->manager->id }}">{{ $htl->manager->name }}
                                                 @endif
                                             </td>
-                                                <td id="address{{ $htl->id }}">{{ $htl->address }}</td>
+
                                                 <td id="rideCount{{ $htl->id }}">{{ $htl->rides_count }}</td>
                                                 <input type="hidden" id="hoteldata" data-hotel_name="{{$htl->name}}" data-hotel_address="{{$htl->address}}" data-hotel_manager_id="{{$htl->manager->id}}" data-hotel_manager_name="{{$htl->manager->name}}">
-                                                <td>
+                                                <td class="text-end">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{ $htl->id }})" title="Edit"><i
                                                             class="ri-edit-2-line"></i></button>
                                                     <a href="{{route('hotels.delete',$htl->id)}}"><button class="btn btn-danger"><i class="ri-delete-bin-line"></i></button></a>
