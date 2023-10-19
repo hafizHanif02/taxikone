@@ -102,6 +102,7 @@ class PaymentController extends Controller
         if(Auth::check()){
             $userData = Auth::user();
             if($userData->is_admin){
+                return $driverDataAll;
                 return view('admin.payment', [
                     'userData'=>$userData,
                     'hotelDatas'=>$hotelDataAll,
