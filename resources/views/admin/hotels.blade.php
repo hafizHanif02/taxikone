@@ -50,7 +50,7 @@
                                     <tbody>
                                         @foreach ($hotels as $htl)
                                             <tr>
-                                                <td id="hotelID"{{ $htl->id }}>{{ $htl->id }}</td>
+                                                <td id="hotelID"{{ $htl->id }}>{{$loop->iteration }}</td>
                                                 <td id="name{{ $htl->id }}">{{ $htl->name }}</td>
                                                 <td
                                                 @if($htl->manager)
