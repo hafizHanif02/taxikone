@@ -42,6 +42,7 @@
                                             <th>Hote Name</th>
                                             <th>Controller Username</th>
                                             <th>Address</th>
+                                            <th>Rides</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -58,6 +59,7 @@
                                                 @endif
                                             </td>
                                                 <td id="address{{ $htl->id }}">{{ $htl->address }}</td>
+                                                <td id="rideCount{{ $htl->id }}">{{ $htl->rides_count }}</td>
                                                 <input type="hidden" id="hoteldata" data-hotel_name="{{$htl->name}}" data-hotel_address="{{$htl->address}}" data-hotel_manager_id="{{$htl->manager->id}}" data-hotel_manager_name="{{$htl->manager->name}}">
                                                 <td>
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{ $htl->id }})" title="Edit"><i
