@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class ride extends Model
 {
     use HasFactory;
+
+    protected $dates = ['ride_date'];
+
     protected $fillable = [
         'customer_name',
         'ride_date',
