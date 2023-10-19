@@ -40,6 +40,7 @@
                                             <tr>
                                                 <th class="text-start">ID</th>
                                                 <th>Driver</th>
+                                                <th>Rides</th>
                                                 <th class="text-end">Action</th>
                                             </tr>
                                         </thead>
@@ -50,6 +51,7 @@
                                             <tr class="">
                                                 <td class="text-start">{{ $loop->iteration}}</td>
                                                 <td id="userID{{$driver->id}}">{{$driver->name}}</td>
+                                                <td id="userRide{{$driver->id}}">{{$driver->rides}}</td>
                                                 <td class="text-end">
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{$driver->id}})" title="Edit"><i class="ri-edit-2-line"></i></button>
                                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="setDataToModelDelete({{$driver->id}})" title="Delete"><i class="ri-delete-bin-line"></i></button>
