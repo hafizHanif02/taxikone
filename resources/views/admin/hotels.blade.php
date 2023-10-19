@@ -40,7 +40,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Hote Name</th>
-                                            <th>Controller Username</th>
+                                            <th>Group Manager</th>
                                             <th>Address</th>
                                             <th>Rides</th>
                                             <th>Action</th>
