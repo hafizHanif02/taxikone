@@ -6,6 +6,7 @@ use App\Models\Driver;
 use Illuminate\Http\Request;
 // use Illuminate\Foundation\Auth\User;
 use App\Models\User;
+use App\Models\ride;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Migrations\Migration;
@@ -30,7 +31,9 @@ class DriverController extends Controller
             if($userData->is_admin){
                 $driver = User::where('is_driver',1)->get();
 
-
+                foreach($driver as $dri){
+                    $dri->rides = ride::where('driver_id', $dri->id)->count();
+                }
                 return view('admin.driver', ['userData'=>$userData,'drivers'=>$driver]);
             }
             return "asdfdsf";
