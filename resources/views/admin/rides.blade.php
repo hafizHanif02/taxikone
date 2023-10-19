@@ -67,7 +67,7 @@
                                                 </td>
 
                                                 <td>
-                                                    {{$ride->ride_date}}
+                                                    {{$ride->ride_date->format('d/m/y')}}
                                                     <input required type="hidden" class="ride_date{{$ride->id}}" value="{{$ride->ride_date}}">
 
                                                 </td>
