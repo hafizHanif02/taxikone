@@ -17,16 +17,22 @@ class Hotel extends Model
         'manager_id',
         'address',
     ];
-    
+
     public function manager(): BelongsTo
     {
         return $this->belongsTo(User::class,'user_id'); // Use 'manager_id' as the foreign key
     }
 
-    
+
 
     public function drivers(): HasMany
     {
         return $this->hasMany(User::class); // Assuming Driver is the related model, no need for a foreign key here
     }
+
+    public function rides(): HasMany
+    {
+        return $this->hasMany(ride::class, 'hotel_id'); // Assuming Driver is the related model, no need for a foreign key here
+    }
+
 }

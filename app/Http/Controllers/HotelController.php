@@ -17,25 +17,26 @@ class HotelController extends Controller
             $userData = Auth::user();
 
             if($userData->is_admin){
-                $hotels = hotel::with('manager')->get();
-                $managers = User::where('is_controller',1)->get(); 
+                $hotels = hotel::with('manager', 'rides')->get();
+                return $hotels;
+                $managers = User::where('is_controller',1)->get();
                 return view('admin.hotels', [
-                    'userData'=>$userData, 
+                    'userData'=>$userData,
                     'hotels' => $hotels,
                     'managers'=> $managers
                 ]);
             }else if($userData->is_controller){
-                
+
             $hotels = hotel::where('user_id',$userData->id)->with('manager')->get();
             $manager = User::where('id',$userData->id)->first();
                 return view('controller.hotels', [
-                    'userData'=>$userData, 
+                    'userData'=>$userData,
                     'hotels' => $hotels,
                 ]);
             }
-            
+
         }
-       
+
     }
 
     // public function create(){
@@ -74,10 +75,10 @@ class HotelController extends Controller
             $userData = Auth::user();
             $hotels = hotel::where('user_id',$userData->id)->with('manager')->get();
                 return view('controller.hotels', [
-                    'userData'=>$userData, 
+                    'userData'=>$userData,
                     'hotels' => $hotels,
                 ]);
-            
+
             return "asdfdsf";
         }
     }
