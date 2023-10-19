@@ -35,7 +35,7 @@ class Hotel extends Model
         return $this->hasMany(ride::class, 'hotel_id'); // Assuming Driver is the related model, no need for a foreign key here
     }
 
-    public function ridesCount(): int
+    public function ridesCount()
     {
         return $this->rides->count(); // Assuming Driver is the related model, no need for a foreign key here
     }
