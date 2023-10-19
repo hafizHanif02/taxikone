@@ -54,7 +54,7 @@
                                             @foreach ($commissions as $commission)
                                             <tr>
                                                 {{-- {{dd($commission)}} --}}
-                                                <td>{{$commission->id}}</td>
+                                                <td>{{$loop->iteration }}</td>
                                                 <td id="name{{$commission->id}}">{{$commission->hotel->name}}</td>
                                                 <td id="address{{$commission->id}}">{{$commission->destination->name}}</td>
                                                 <td id="destination_address{{$commission->id}}">{{$commission->destination->address}}</td>

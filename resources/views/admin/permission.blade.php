@@ -52,7 +52,7 @@
 
                                             @foreach ($roles as $role)
                                             <tr>
-                                                <td>{{$role->id}}</td>
+                                                <td>{{$loop->iteration }}</td>
                                                 <td id="name{{$role->id}}">{{$role->name}}</td>
                                                 <td>24</td>
                                                 <td class="txt-center">
