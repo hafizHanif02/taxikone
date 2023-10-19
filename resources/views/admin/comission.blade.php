@@ -33,7 +33,7 @@
                                     <h4 class="header-title">Commission List</h4>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="overflow: scroll;">
                                     <table id="datatable-buttons"
                                         class="table table-striped dt-responsive nowrap w-100">
                                         <thead>

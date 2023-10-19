@@ -34,7 +34,7 @@
                                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i
                                         class="ri-add-line"></i> New</button>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="overflow: scroll;">
                                 <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                                     <thead>
                                         <tr>
@@ -62,7 +62,7 @@
                                                 <td>
                                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit-modal" onclick="setDataToModel({{ $htl->id }})" title="Edit"><i
                                                             class="ri-edit-2-line"></i></button>
-                                                    <a href="{{route('hotels.delete',$htl->id)}}"><button class="btn btn-danger"><i class="ri-delete-bin-line"></i></button></a>                                                
+                                                    <a href="{{route('hotels.delete',$htl->id)}}"><button class="btn btn-danger"><i class="ri-delete-bin-line"></i></button></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -172,7 +172,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            
+
 
                         </div>
                         <div class="modal-footer">

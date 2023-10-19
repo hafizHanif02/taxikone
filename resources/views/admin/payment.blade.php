@@ -35,7 +35,7 @@
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
                                 </div>
                                 <div class="card-body">
-                                   
+
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                         <div class="accordion-item">
                                             <div class="row">
@@ -50,7 +50,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="overflow: scroll;">
                                             <div class="accordion-body">
                                                 <table class="table table-bordered">
                                                     <thead>
@@ -69,7 +69,7 @@
                                                             <td>{{$loop->iteration }}</td>
                                                             <td>{{$driverData->driver->name}}</td>
                                                             <td>{{$driverData->number_of_rides}}</td>
-                                                            
+
                                                             <td>{{ number_format($driverData->balance_comission, 2) }}</td>
                                                             <td>
                                                                 @if ($driverData->balance_comission != 0)
@@ -110,14 +110,14 @@
 
 
 
-                                                
+
 
 
                                             </div>
                                           </div>
                                         </div>
                                         <div class="accordion-item">
-                                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample" style="overflow: scroll;">
                                             <div class="accordion-body">
                                                 <table class="table table-bordered">
                                                     <thead>
@@ -132,7 +132,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        
+
                                                         @foreach ($hotelDatas as $hotelData)
                                                         <tr class="text-center">
                                                             <td>{{$loop->iteration }}</td>
@@ -198,7 +198,7 @@
 
             {{-- Models start here --}}
             <!-- Standard modal content -->
-           
+
             {{-- Models end here --}}
             <!-- Footer Start -->
             <footer class="footer">
