@@ -34,7 +34,7 @@ class DriverController extends Controller
                 foreach($driver as $dri){
                     $dri->rides = ride::where('driver_id', $dri->id)->count();
                 }
-                $driver = $driver->sortBy('rides');
+                $driver = $driver->sortBy('rides')->reverse();
                 return view('admin.driver', ['userData'=>$userData,'drivers'=>$driver]);
             }
             return "asdfdsf";
