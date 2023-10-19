@@ -108,10 +108,7 @@
                                         placeholder="hotel Name here">
                                 </div>
                             </div>
-                            <div class="row mb-2">
-                                <label for="username" class="form-label">Hotel Address</label>
-                                <input type="text" placeholder="hotel address here" class="form-control" name="address">
-                            </div>
+
 
                             <div class="row mb-2">
                                 <label for="username" class="form-label">Hotel Manager</label>
@@ -159,10 +156,7 @@
                                         placeholder="hotel Name here">
                                 </div>
                             </div>
-                            <div class="row mb-2">
-                                <label for="username" class="form-label">Hotel Address</label>
-                                <input type="text" placeholder="hotel address here" id="hotel_address_edit" class="form-control" name="address">
-                            </div>
+                           
 
                             <div class="row mb-2">
                                 <label for="username" class="form-label">Hotel Manager</label>
