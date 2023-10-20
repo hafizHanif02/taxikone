@@ -32,7 +32,7 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between" >
                                     <h4 class="header-title">Payment List</h4>
-                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button>
+                                    {{-- <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-modal"><i class="ri-add-line"></i> New</button> --}}
                                 </div>
                                 <div class="card-body">
 

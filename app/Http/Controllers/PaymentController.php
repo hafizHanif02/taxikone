@@ -77,6 +77,7 @@ class PaymentController extends Controller
             DB::raw('SUM(comission_rate) as total_commission'),
         )
         ->groupBy('driver_id')->with('driver')->get();
+        //return $driverDataAll;
 
         $driverDataPaid = ride::select(
             DB::raw('driver_id as driver_id'),
@@ -84,6 +85,8 @@ class PaymentController extends Controller
             DB::raw('SUM(comission_rate) as total_commission'),
         )
         ->groupBy('driver_id')->where(['driver_paid' => 1])->with('driver')->get();
+
+        //return $driverDataPaid;
 
         foreach($driverDataAll as $driverAll){
             $isFound = false;
@@ -95,14 +98,14 @@ class PaymentController extends Controller
                 }
             }
             if(!$isFound){
-                $driverAll->balance_comission = '0';
+                $driverAll->balance_comission = $driverAll->total_commission;
             }
         }
         // dd($hotelData);
         if(Auth::check()){
             $userData = Auth::user();
             if($userData->is_admin){
-                
+
                 return view('admin.payment', [
                     'userData'=>$userData,
                     'hotelDatas'=>$hotelDataAll,
